@@ -8,17 +8,40 @@
       color="blue-grey darken-4"
     >
 
-   
+  
      <v-btn 
         
-        color="white"
+         color="white"
         flat
         value="home"
-         @click="$vuetify.goTo(target, options)"
+        to="/"
         
       >
     <v-icon>home</v-icon>
       </v-btn>
+       <v-btn 
+       color="white"
+        
+        flat
+        value="search"
+        to="search"
+        
+      >
+      <v-icon>search</v-icon>
+   </v-btn>
+   
+  
+     <v-btn 
+        
+         color="white"
+         flat
+         value="up"
+         @click="$vuetify.goTo(target, options)"
+        
+      >
+    <v-icon>arrow_upward</v-icon>
+      </v-btn>
+      
  
     
    
@@ -63,10 +86,7 @@ export default {
 };
 </script>
 <style scoped>
-.bottomNavControls {
-  
- 
-}
+
 </style>
 
 
