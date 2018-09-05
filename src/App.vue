@@ -1,6 +1,18 @@
 <template>
   <v-app>
+ <v-navigation-drawer
+      v-model="drawer"
+      disable-resize-watcher
+      disable-route-watcher
+      fixed
+      light
+      :clipped="$vuetify.breakpoint.lgAndUp"
+      app
+      width="310"
+    >
+    <search></search>
 
+    </v-navigation-drawer>
     <v-toolbar
       color="indigo darken-1"
       dark
@@ -10,10 +22,11 @@
       id ="toolbar"
       
     >
-
+     
       <v-toolbar-title v-text="title" color="white" >
        
       </v-toolbar-title>
+      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
      
        <div class="d-flex align-center " style="margin-left: auto">
            <v-bottom-sheet 
@@ -24,7 +37,7 @@
               down: () => swipe('down')
             }"
            lazy >
-       
+
     <v-btn
         slot="activator"
         dark
@@ -67,8 +80,11 @@
         </v-btn>
       </div>
     </v-toolbar>
+   
     <v-content id="content">
+     
       <router-view/>
+      
     </v-content>
   
 <v-fab-transition v-if="showOnMdAndUp" >
@@ -95,86 +111,86 @@
 </template>
 
 <script>
-
-import  bottomNav  from "./components/BottomNav.vue"
-import  mfooter from "./components/mFooter.vue"
-import footerInfo from "./components/FooterInfo.vue"
+import bottomNav from "./components/BottomNav.vue";
+import mfooter from "./components/mFooter.vue";
+import footerInfo from "./components/FooterInfo.vue";
+import search from "./components/Search.vue";
 export default {
-  components:{
+  components: {
     mfooter,
     bottomNav,
-    footerInfo
+    footerInfo,
+    search
   },
-   name: 'App',
-  data () {
+  name: "App",
+  data() {
     return {
-      selector:"#content",
-      duration:300,
-      offset:15,
-      easing: 'easeInOutCubic',
-      title: 'Recalls Query',
+      selector: "#content",
+      duration: 300,
+      offset: 15,
+      easing: "easeInOutCubic",
+      title: "Recalls Query",
       action: true,
-      beforeinstallpromptfired:false,
-      deferredPrompt:null,
+      beforeinstallpromptfired: false,
+      deferredPrompt: null,
       sheet: false,
-    
-    }
+      drawer: true
+    };
   },
   computed: {
-    target(){
-      let vm = this
-      let value = vm.selector
-      if(!isNaN(value)) return Number(value)
-      else return value
+    target() {
+      let vm = this;
+      let value = vm.selector;
+      if (!isNaN(value)) return Number(value);
+      else return value;
     },
-    options () {
-        return {
-          duration: this.duration,
-          offset: this.offset,
-          easing: this.easing
-        }
+    options() {
+      return {
+        duration: this.duration,
+        offset: this.offset,
+        easing: this.easing
+      };
     },
-    showOnMdAndUp(){
-      return this.$vuetify.breakpoint.mdAndUp
+    showOnMdAndUp() {
+      return this.$vuetify.breakpoint.mdAndUp;
     },
-    showOnSmAndDown(){
-     return  this.$vuetify.breakpoint.smAndDown
+    showOnSmAndDown() {
+      return this.$vuetify.breakpoint.smAndDown;
     }
   },
- 
-mounted(){
-    const vm = this
-    window.addEventListener('beforeinstallprompt', (e) => {
-  // Prevent Chrome 67 and earlier from automatically showing the prompt
-     e.preventDefault();
-    
-  // Stash the event so it can be triggered later.
-    vm.deferredPrompt = e;
-  //show install button
-  vm.beforeinstallpromptfired = true
 
-  window.addEventListener('appinstalled', (event) => {
-     alert('app successfuly installed');
+  mounted() {
+    const vm = this;
+    window.addEventListener("beforeinstallprompt", e => {
+      // Prevent Chrome 67 and earlier from automatically showing the prompt
+      e.preventDefault();
+
+      // Stash the event so it can be triggered later.
+      vm.deferredPrompt = e;
+      //show install button
+      vm.beforeinstallpromptfired = true;
+
+      window.addEventListener("appinstalled", event => {
+        alert("app successfuly installed");
+      });
     });
-});
   },
-  methods:{
-  showInstallPrompt(e){
-   const vm = this
-   
-   vm.beforeinstallpromptfired = false 
-   vm.deferredPrompt.prompt();
-   vm.deferredPrompt.userChoice
-    .then((choiceResult)=>{
-      if(choiceResult.outcome === 'accepted'){
-        
-      }else{
-        alert('user dimissed prompt, will have to wait until the beforepromptinstall event fires')
-      }
-      vm.deferredPrompt = null
-      })
-    
+  methods: {
+    showInstallPrompt(e) {
+      const vm = this;
+
+      vm.beforeinstallpromptfired = false;
+      vm.deferredPrompt.prompt();
+      vm.deferredPrompt.userChoice.then(choiceResult => {
+        if (choiceResult.outcome === "accepted") {
+        } else {
+          alert(
+            "user dimissed prompt, will have to wait until the beforepromptinstall event fires"
+          );
+        }
+        vm.deferredPrompt = null;
+      });
+    }
   }
-  }
-}
+};
 </script>
