@@ -104,12 +104,7 @@
 import { EventBus } from "../eventBus.js";
 export default {
   name: "resultList",
-  
- // props: {
- //   recalls: {
- //     required: true
- //   }
- // },
+ 
   methods: {
     avatarUrl: function(item) {
       var avatar = this.altImage;
@@ -130,11 +125,7 @@ export default {
     }
   },
   watch: {
-    //recalls: function(data) {
-    //  this.resultCount = data.length;
-    //  this.hasResult = true;
-    //}
-  },
+     },
   mounted: function(){
      this.$vuetify.goTo(this.target, this.options)
       let vm = this
