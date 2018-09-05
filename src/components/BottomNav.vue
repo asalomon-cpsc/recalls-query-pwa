@@ -8,16 +8,16 @@
       color="blue-grey darken-4"
     >
 
-  
+   <v-icon @click.stop="drawer = !drawer"></v-icon>
      <v-btn 
         
-         color="white"
+        color="white"
         flat
         value="home"
-        to="/"
+         to="/"
         
       >
-    <v-icon>home</v-icon>
+       <v-icon>home</v-icon>
       </v-btn>
        <v-btn 
        color="white"
@@ -40,8 +40,9 @@
         
       >
     <v-icon>arrow_upward</v-icon>
+    
+    <v-icon>home</v-icon>
       </v-btn>
-      
  
     
    
@@ -58,6 +59,7 @@ export default {
 
   data: function() {
     return {
+      drawer:null,
       selector: "#content",
       duration: 300,
       offset: 15,
