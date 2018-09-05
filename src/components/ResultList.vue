@@ -1,5 +1,7 @@
 <template>
-   <v-flex xs12 sm12 md8 lg8 xl8 id="resultList"> 
+<v-container >
+        <v-layout align-center >
+   <v-flex xs12 sm12 md12 lg12 xl12 id="resultList"> 
       
       <v-list three-line >
         
@@ -10,7 +12,7 @@
            <v-card active-class="warning" hover raised v-bind:key="index">
             <v-list-tile  v-bind:size="thumbSize"  ripple  v-bind:key="index" >
                  <a v-bind:href="avatarUrl(item)" target="_blank">
-                  <v-list-tile-avatar tile   >
+                  <v-list-tile-avatar tile size="55"  >
         
                  <img   v-bind:src="avatarUrl(item)" alt=""/>
                        </v-list-tile-avatar>
@@ -94,16 +96,20 @@
       
     
     </v-flex>
+        </v-layout>
+</v-container>
 </template>
 
 <script>
+import { EventBus } from "../eventBus.js";
 export default {
   name: "resultList",
-  props: {
-    recalls: {
-      required: true
-    }
-  },
+  
+ // props: {
+ //   recalls: {
+ //     required: true
+ //   }
+ // },
   methods: {
     avatarUrl: function(item) {
       var avatar = this.altImage;
@@ -124,17 +130,22 @@ export default {
     }
   },
   watch: {
-    recalls: function(data) {
-      this.resultCount = data.length;
-      this.hasResult = true;
-    }
+    //recalls: function(data) {
+    //  this.resultCount = data.length;
+    //  this.hasResult = true;
+    //}
   },
   mounted: function(){
      this.$vuetify.goTo(this.target, this.options)
+      let vm = this
+    EventBus.$on('searchResultFetched',results =>{
+       vm.resultCount = results.resultCount
+       vm.hasResult = true
+       vm.recalls = results.recalls
+    })
   },
-  created: function() {
-    
-  },
+ 
+  
   computed:{
     target(){
       let vm = this
@@ -153,6 +164,7 @@ export default {
   },
   data: function() {
     return {
+      recalls:[],
       transitionSelector:"#resultList",
       duration:300,
       offset:15,
