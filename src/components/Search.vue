@@ -1,9 +1,9 @@
 <template >
 
-<v-container grid-list-xl text-xs-center>
-        <v-layout justify-center align-top  wrap>
+<v-container >
+        <v-layout   wrap>
 
-      <v-flex xs12 sm12 md4 lg4 xl4>
+      <!--<v-flex xs12 sm12 md4 lg4 xl4>-->
        <div id="search">
         <v-form   ref="form"  >
     <v-text-field
@@ -71,8 +71,9 @@
       color="indigo darken-1"
       class="white--text"
       :loading="showProgress && !hasResult && !isError"
-      @click.prevent="isAtLeastOneFieldValid?submit():showFormValidDialog=true"
+      @click.prevent.stop="isAtLeastOneFieldValid?submit():showFormValidDialog=true"
       :disabled="showProgress && !hasResult && !isError"
+      
     >
       Apply
        <v-icon color="green lighten-2" light right>check_circle</v-icon>
@@ -88,7 +89,7 @@
       {{resultCount}} record(s) found
     </v-alert>
 
-    </v-flex>
+    <!--</v-flex>-->
    
    
    <v-flex v-if="isError">
@@ -100,8 +101,8 @@
   
     </v-flex>
     
-    <result-list v-if="hasResult" :recalls="recalls"></result-list>
-    
+   <!-- <result-list v-if="hasResult" :recalls="recalls"></result-list>
+    -->
      
 
 
@@ -124,13 +125,14 @@
 </template>
 
 <script>
-import resultList from "./ResultList.vue";
+
 import axios from "axios";
 import moment from "moment";
+import {  EventBus } from "../eventBus.js";
 export default {
   name: "search",
   components: {
-    resultList
+    
   },
   data: function() {
     return {
@@ -140,9 +142,9 @@ export default {
         cleared: true,
         completed: false
       },
-      
+
       loader: null,
-      searchFor: '',
+      searchFor: "",
       productName: "",
       manufacturer: "",
       productType: "",
@@ -185,19 +187,18 @@ export default {
     hasResult: function() {
       return this.resultCount > 0 ? true : false;
     },
-  
-    
+
     isAtLeastOneFieldValid: function() {
       const vm = this;
-      
+
       return (
-        (vm.searchFor !== undefined && vm.searchFor !=="")  ||
-        (vm.productName !== undefined && vm.productName !=="") ||
-        (vm.manufacturer !== undefined && vm.manufacturer !=="") ||
-        (vm.productModel !== undefined && vm.productModel !=="") ||
-        (vm.productType !== undefined && vm.productType!=="") ||
-        (vm.relativeDate !== undefined && vm.relativeDate !=="")
-      )
+        (vm.searchFor !== undefined && vm.searchFor !== "") ||
+        (vm.productName !== undefined && vm.productName !== "") ||
+        (vm.manufacturer !== undefined && vm.manufacturer !== "") ||
+        (vm.productModel !== undefined && vm.productModel !== "") ||
+        (vm.productType !== undefined && vm.productType !== "") ||
+        (vm.relativeDate !== undefined && vm.relativeDate !== "")
+      );
     }
   },
   watch: {
@@ -210,11 +211,8 @@ export default {
   },
   created: function() {
     let vm = this;
-   
   },
   methods: {
-  
-
     setDateRange(number) {
       let vm = this;
       if (number > 0) {
@@ -234,7 +232,7 @@ export default {
       const thirdwebsiteurl = window.location.href;
       const thirdwebsitetitle = document.title;
       vm.resultCount = 0;
-      vm.formState.completed = false
+      vm.formState.completed = false;
       let isvalid = vm.isAtLeastOneFieldValid;
       if (isvalid) {
         vm.isError = false;
@@ -252,6 +250,10 @@ export default {
           .then(response => {
             if (response.data.length > 0) {
               vm.handleResponse(response);
+              EventBus.$emit("searchResultFetched", {
+                resultCount: vm.resultCount,
+                recalls: vm.recalls
+              });
               
             } else {
               vm.showProgress = false;
@@ -265,6 +267,7 @@ export default {
             vm.formState.completed = true;
             console.log(error);
           });
+          this.$router.push("resultList");//show resultlist route
       }
     },
     mapRequestParams() {
@@ -298,20 +301,17 @@ export default {
           images: element.Images, //use array functions to filter
           description: element.Description,
           products: element.Products,
-          injuries:element.Injuries,
-          manufacturers:element.Manufacturers,
-          manufacturerCountries:element.ManufacturerCountries,
-          productUpcs:element.ProductUPCs,
-          hazards:element.Hazards,
-          remedies:element.Remedies,
-          retailers:element.Retailers
-
+          injuries: element.Injuries,
+          manufacturers: element.Manufacturers,
+          manufacturerCountries: element.ManufacturerCountries,
+          productUpcs: element.ProductUPCs,
+          hazards: element.Hazards,
+          remedies: element.Remedies,
+          retailers: element.Retailers
         });
         vm.resultCount = vm.recalls.length;
-        //vm.recalls.sort();
       });
-      //vm.manufacturers.sort();
-      //vm.productTypes.sort();
+
       vm.formState.completed = true;
     },
     clear() {
@@ -322,6 +322,7 @@ export default {
       this.formState.started = false;
       this.formState.completed = false;
       this.formState.cleared = true;
+      EventBus.$emit("formCleared", true);
     }
   }
 };
