@@ -18,17 +18,7 @@
         
       >
        <v-icon>home</v-icon>
-      </v-btn>
-       <v-btn 
-       color="white"
-        
-        flat
-        value="search"
-        to="search"
-        
-      >
-      <v-icon>search</v-icon>
-   </v-btn>
+     </v-btn>
    
   
      <v-btn 
@@ -41,7 +31,6 @@
       >
     <v-icon>arrow_upward</v-icon>
     
-    <v-icon>home</v-icon>
       </v-btn>
  
     

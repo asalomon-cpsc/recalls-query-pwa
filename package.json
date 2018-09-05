@@ -1,7 +1,7 @@
 {
-  "name": "pwa-vuetify",
+  "name": "pwa-recalls-app",
   "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "A progressive web app for consumer product recalls",
   "author": "Salomon <asalomon@cpsc.gov>",
   "private": true,
   "scripts": {
