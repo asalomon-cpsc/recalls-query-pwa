@@ -7,7 +7,7 @@
        <div id="search">
         <v-form   ref="form"  >
     <v-text-field
-      prepend-icon="search"
+      append-icon="search"
       color="green darken-2"
       label="Search For"
       v-model="searchFor"
@@ -16,7 +16,7 @@
     >
     </v-text-field>
     <v-text-field
-    prepend-icon="title"
+    append-icon="title"
      color="purple darken-2"
       label="Product Name"
       clearable
@@ -26,7 +26,7 @@
     
     <v-select
     v-show="hasResult"
-     prepend-icon="business"
+     append-icon="business"
     
       :disabled="formState.cleared && !manufacturers.length>0"
       label="Manufacture"
@@ -39,20 +39,20 @@
     
     v-show="hasResult"
     :disabled="formState.cleared && !productTypes.length>0"
-    prepend-icon="battery_unknown"
+    appenda-icon="battery_unknown"
       label="Product Type"
       v-model="productType"
       :items="productTypes"
       clearable
     ></v-select>
     <v-text-field
-     prepend-icon="battery_unknown"
+     append-icon="battery_unknown"
       label="Product Model"
       v-model.trim="productModel"
       :value="productModel"
     ></v-text-field>
     <v-select
-     prepend-icon="date_range"
+     append-icon="date_range"
      color="orange darken-2"
       label="Date Range"
       v-model="relativeDate"

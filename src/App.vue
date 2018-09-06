@@ -45,7 +45,7 @@
         value="info"
       >  
 
-        <v-icon v-if="showOnSmAndDown" color="orange lighten-2">info</v-icon>
+        <v-icon  color="orange lighten-2">info</v-icon>
       </v-btn>
         
      <v-card raised ripple class=" flex text-xs-center">
@@ -87,7 +87,7 @@
       
     </v-content>
   
-<v-fab-transition v-if="showOnMdAndUp" >
+<v-fab-transition >
       <v-btn
         color="orange darken-4"
         dark

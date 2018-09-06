@@ -2,6 +2,7 @@
     <v-footer
     class="blue-grey darken-4"
     height="auto"
+    fixed
   >
     <v-card
       class="flex text-lg-center"
@@ -9,10 +10,8 @@
       tile
 
     >
-      <v-card-title class="justify-center blue-grey darken-4"  >
-
-        <footer-info></footer-info>
-      </v-card-title>
+      <bottom-nav  ></bottom-nav>
+      
       
     
     </v-card>
@@ -20,10 +19,12 @@
 </template>
 <script>
 import footerInfo from "./FooterInfo.vue"
+import bottomNav from "./BottomNav.vue"
 export default {
   name: "mfooter",
   components:{
-    footerInfo
+    footerInfo,
+    bottomNav
   }
 };
 </script>

@@ -8,7 +8,7 @@
     <v-btn icon
          round
          color="#ffff">
-          <v-avatar size="32px" tile>
+          <v-avatar size="25px" tile>
             <img
               src="https://www.cpsc.gov/sites/all/themes/cpsc/images/logo.png"
               alt="cpsc"
