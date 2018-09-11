@@ -4,12 +4,18 @@ module.exports = {
     themeConfig: {
         nav: [
             { text: 'Guide', link: '/' },
+            { text: 'Versions',
+                 items: [
+                    {text: '0.1', link:'0.1.md'},
+                    {text: '1.0', link:'1.0.md'}
+                 ]
+            },
             { text: 'CPSC APIs', link: '/apidocs/' },
             { text: 'CPSC', link: 'https://www.cpsc.gov' },
           ],
         sidebar: [
             {
-                title: 'Background',
+                title: 'Overview',
                 collapsable: false,
                 children: ['/']
                
