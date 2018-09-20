@@ -1,7 +1,9 @@
 <template>
   <v-card tile height="50px" flat>
     <v-bottom-nav class="bottomNavControls " active.sync="recent" :value="true" fixed color="blue-grey darken-4">
-      <v-icon @click.stop="drawer = !drawer"></v-icon>
+       <v-btn color="white" flat @click.stop="toggleDrawer()">
+        <v-icon>search</v-icon>
+      </v-btn>
       <v-btn color="white" flat :value="tiles[0].Title" to="/">
         <v-icon>home</v-icon>
       </v-btn>
@@ -24,8 +26,12 @@
         offset: 15,
         easing: "easeInOutCubic",
         tiles: [{
-            icon: "home",
-            title: "Home"
+            icon: "search",
+            title: "Search"
+          },
+          {
+            icon: "share",
+            title: "Share"
           }
         ]
       };
@@ -43,6 +49,11 @@
           offset: this.offset,
           easing: this.easing
         };
+      }
+    },
+      methods: {
+      toggleDrawer() {
+        this.$root.$emit('drawerClicked', true)
       }
     }
   };
