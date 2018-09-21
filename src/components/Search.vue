@@ -104,8 +104,6 @@
    <!-- <result-list v-if="hasResult" :recalls="recalls"></result-list>
     -->
      
-
-
  <v-dialog v-model="showFormValidDialog" max-width="500px">
         <v-card>
           <v-card-title>
@@ -146,7 +144,7 @@ export default {
       loader: null,
       searchFor: "",
       productName: "",
-      manufacturer: "",
+      manufacturer: "" ,
       productType: "",
       productModel: "",
       relativeDate: "",
@@ -186,6 +184,9 @@ export default {
   computed: {
     hasResult: function() {
       return this.resultCount > 0 ? true : false;
+    },
+    clearDropDowns(){
+      formState.cleared && !productTypes.length> 0
     },
 
     isAtLeastOneFieldValid: function() {
@@ -242,7 +243,6 @@ export default {
         vm.formState.started = true;
         vm.recalls = [];
         let mappedRequest = vm.mapRequestParams();
-
         let requestParams = axios
           .get(apiRecallURL, {
             params: mappedRequest
@@ -259,13 +259,15 @@ export default {
               vm.showProgress = false;
               vm.formState.started = false;
               vm.formState.completed = true;
+              vm.manufacturer="";
+              vm.productTypes="";//need to reset those filter values since they will be invisible but still bound to model
               vm.recalls = [];
             }
           })
           .catch(error => {
             vm.isError = true;
             vm.formState.completed = true;
-            console.log(error);
+            
           });
           this.$router.push("resultList");//show resultlist route
       }
