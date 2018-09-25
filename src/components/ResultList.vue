@@ -43,44 +43,44 @@
           
           <h4>Products</h4>
           
-            <div v-for="p in item.products" :key="p.Name">
+            <div v-for="p in item.products" :key="p.name">
               <br/>
-              <span><strong>Name: </strong> {{p.Name}}</span><br/>
-              <span><strong>Type: </strong> {{p.Type}}</span><br/>
-              <span><strong>Model: </strong> {{p.Model}}</span><br/>
-              <span><strong>No Of Units: </strong> {{p.NumberOfUnits}}</span><br/>
+              <span><strong>Name: </strong> {{p.name}}</span><br/>
+              <span><strong>Type: </strong> {{p.type}}</span><br/>
+              <span><strong>Model: </strong> {{p.model}}</span><br/>
+              <span><strong>No Of Units: </strong> {{p.numberOfUnits}}</span><br/>
             </div><br/>
             
             <h4>Injuries</h4>
-             <span v-for="p in item.injuries" :key="p.Name">
-              <p>{{p.Name}}</p>
+             <span v-for="p in item.injuries" :key="p.name">
+              <p>{{p.name}}</p>
             </span><br/>
           <h4>Manufacturers</h4>
             
-             <span v-for="m in item.manufacturers" :key="m.Name">
-             <p>{{m.Name}}</p>
+             <span v-for="m in item.manufacturers" :key="m.name">
+             <p>{{m.name}}</p>
             
             </span><br/>
             <h4>Manufacturer Countries</h4>
-             <span v-for="mc in item.manufacturerCountries" :key="mc.Country">
-              <p>{{mc.Country}}</p>
+             <span v-for="mc in item.manufacturerCountries" :key="mc.country">
+              <p>{{mc.country}}</p>
             </span><br/>
             <h4>ProductUpcs</h4>
-            <span  v-for="upc in item.productUpcs" :key="upc.UPC">
-              {{upc.UPC}}
+            <span  v-for="upc in item.productUpcs" :key="upc.uPC">
+              {{upc.upc}}
               </span><br/>
             <h4>Hazards</h4>
-             <span v-for="haz in item.hazards" :key="haz.Name">
-              <p>{{haz.Name}}</p>
+             <span v-for="haz in item.hazards" :key="haz.name">
+              <p>{{haz.name}}</p>
             </span>
             <h4>Remedies</h4>
-             <span v-for="r in item.remedies" :key="r.Name">
-              <p>{{r.Name}}</p>
+             <span v-for="r in item.remedies" :key="r.name">
+              <p>{{r.name}}</p>
             </span><br/>
             <h4>Retailers</h4>
             
-             <span v-for="ret in item.retailers" :key="ret.Name">
-              <p>{{ret.Name}}</p>
+             <span v-for="ret in item.retailers" :key="ret.name">
+              <p>{{ret.name}}</p>
             </span><br/>
 
           </v-card-text>
@@ -115,7 +115,7 @@ export default {
         item.images.length > 0
       ) {
         return item.images[0] !== undefined
-          ? item.images[0].URL
+          ? item.images[0].url
           : this.altImage;
       }
       return avatar;

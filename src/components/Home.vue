@@ -14,7 +14,7 @@
                     <v-card color="white" class="dark--text" :href="r.url" target="_blank" ripple>
                       <v-layout>
                         <v-flex xs12>
-                          <v-card-media contain :src="r.images[0].URL" class="black--text" height="180" aspect-ratio="1">
+                          <v-card-media contain :src="r.images[0].url" class="black--text" height="180" aspect-ratio="1">
                           </v-card-media>
                         </v-flex>
                       </v-layout>
@@ -57,7 +57,7 @@
                   <v-layout>
                     <v-flex xs12>
 
-                      <v-card-media position="left" contain :src="r.images[0].URL" class="black--text" height="70"
+                      <v-card-media position="left" contain :src="r.images[0].url" class="black--text" height="70"
                         aspect-ratio="1">
                       </v-card-media>
                       <v-divider></v-divider>
@@ -122,7 +122,7 @@
         let vm = this;
         const cpscapi = process.env.ROOT_RECALLS_API;
         const apiRecallURL = cpscapi +
-          "/api/recalls/latest";
+          "latest";
         const thirdwebsiteurl = window.location.href;
         const thirdwebsitetitle = document.title;
         vm.resultCount = 0;
@@ -131,7 +131,7 @@
         let requestParams = axios
           .get(apiRecallURL)
           .then(response => {
-            if (response.data.length > 0) {
+            if (response.data.resultCount > 0) {
               vm.handleResponse(response);
             } else {
               //vm.showProgress = false;
@@ -146,14 +146,14 @@
         let vm = this;
         const cpscapi = process.env.ROOT_RECALLS_API;
         const apiRecallURL = cpscapi +
-          "api/recalls/childrens"
+          "children"
         vm.resultCount = 0;
         vm.childrensRecalls = []
         console.log(apiRecallURL)
         let requestParams = axios
           .get(apiRecallURL)
           .then(response => {
-            if (response.data.length > 0) {
+            if (response.data.resultCount > 0) {
               vm.handleChildrensResponse(response)
             } else {
               //vm.showProgress = false;
@@ -166,33 +166,33 @@
       },
       handleChildrensResponse(response) {
         const vm = this;
-        response.data.forEach(element => {
+        response.data.recalls.forEach(element => {
           console.log("handling children's");
-
+          console.log(element.title);
           vm.childrensRecalls.push({
-            title: element.Title,
-            url: element.URL,
-            recallDate: moment(element.RecallDate).format("MMM Do YYYY"),
-            productName:element.Products[0].Name,
-            images: element.Images, //use array functions to filter
-            description: element.Description,
-            manufacturerCountries: element.ManufacturerCountries
+            title: element.title,
+            url: element.url,
+            recallDate: moment(element.recallDate).format("MMM Do YYYY"),
+            productName:element.products[0].name,
+            images: element.images, //use array functions to filter
+            description: element.description,
+            manufacturerCountries: element.manufacturerCountries
           });
           vm.resultCount = vm.recalls.length;
         });
       },
       handleResponse(response) {
         const vm = this;
-        response.data.forEach(element => {
+        response.data.recalls.forEach(element => {
           console.log("handling latest");
 
           vm.newRecalls.push({
-            title: element.Title,
-            url: element.URL,
-            recallDate: moment(element.RecallDate).format("MMM Do YYYY"),
-            images: element.Images, //use array functions to filter
-            description: element.Description,
-            manufacturerCountries: element.ManufacturerCountries
+            title: element.title,
+            url: element.url,
+            recallDate: moment(element.recallDate).format("MMM Do YYYY"),
+            images: element.images, //use array functions to filter
+            description: element.description,
+            manufacturerCountries: element.manufacturerCountries
           });
           vm.resultCount = vm.recalls.length;
         });

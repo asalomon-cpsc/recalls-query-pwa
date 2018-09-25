@@ -229,8 +229,8 @@ export default {
     submit() {
       let vm = this;
       const cpscapi = process.env.ROOT_RECALLS_API;
-      const apiRecallURL = cpscapi + "api/Recall/GetRecall";
-      const thirdwebsiteurl = window.location.href;
+      const apiRecallURL = cpscapi;
+
       const thirdwebsitetitle = document.title;
       vm.resultCount = 0;
       vm.formState.completed = false;
@@ -244,11 +244,14 @@ export default {
         vm.recalls = [];
         let mappedRequest = vm.mapRequestParams();
         let requestParams = axios
-          .get(apiRecallURL, {
-            params: mappedRequest
+          .post(apiRecallURL, {
+            data: mappedRequest,
+            withCredentials: false
           })
           .then(response => {
-            if (response.data.length > 0) {
+            
+            if (response.data.resultCount > 0) {
+             
               vm.handleResponse(response);
               EventBus.$emit("searchResultFetched", {
                 resultCount: vm.resultCount,
@@ -283,35 +286,33 @@ export default {
         recallDateEnd: vm.relativeDate > 0 ? vm.recallDates.recallEndDate : "",
         recallDateStart:
           vm.relativeDate > 0 ? vm.recallDates.recallStartDate : "",
-        dateRange: vm.relativeDate ? vm.relativeDate : "",
-        thirdwebsiteurl: window.location.href
       };
     },
     handleResponse(response) {
       const vm = this;
-      response.data.forEach(element => {
-        element.Manufacturers.forEach(m => {
+      response.data.recalls.forEach(element => {
+        element.manufacturers.forEach(m => {
           vm.manufacturers.push(m.Name);
         });
-        element.Products.forEach(p => {
+        element.products.forEach(p => {
           vm.productTypes.push(p.Type);
         });
         vm.recalls.push({
-          title: element.Title,
-          url: element.URL,
-          recallDate: moment(element.RecallDate).format("MMM Do YYYY"),
-          images: element.Images, //use array functions to filter
-          description: element.Description,
-          products: element.Products,
-          injuries: element.Injuries,
-          manufacturers: element.Manufacturers,
-          manufacturerCountries: element.ManufacturerCountries,
-          productUpcs: element.ProductUPCs,
-          hazards: element.Hazards,
-          remedies: element.Remedies,
-          retailers: element.Retailers
+          title: element.title,
+          url: element.url,
+          recallDate: moment(element.recallDate).format("MMM Do YYYY"),
+          images: element.images, //use array functions to filter
+          description: element.description,
+          products: element.products,
+          injuries: element.injuries,
+          manufacturers: element.manufacturers,
+          manufacturerCountries: element.manufacturerCountries,
+          productUpcs: element.productUPCs,
+          hazards: element.hazards,
+          remedies: element.remedies,
+          retailers: element.retailers
         });
-        vm.resultCount = vm.recalls.length;
+        vm.resultCount = response.data.resultCount;
       });
 
       vm.formState.completed = true;

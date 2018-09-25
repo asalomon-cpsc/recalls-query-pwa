@@ -83,7 +83,7 @@
         duration: 300,
         offset: 15,
         easing: "easeInOutCubic",
-        title: "Recalls Query",
+        title: "CPSC Recalls",
         action: true,
         beforeinstallpromptfired: false,
         deferredPrompt: null,
