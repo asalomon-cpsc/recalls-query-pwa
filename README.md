@@ -1,6 +1,7 @@
-# pwa-vuetify
+# CPSC Recalls APP
 
-> A Vue.js project
+> The goal of the recalls PWA app is to act as a mechanism that gives consumers convenient access (from their mobile devices) to recalls. Consumers will be able to quickly lookup a particular product based on a set of criteria when they are shopping online or at a store to check if the product was recalled by the manufacturer(s).
+
 
 ## Build Setup
 
