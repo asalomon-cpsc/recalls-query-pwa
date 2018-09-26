@@ -123,8 +123,6 @@
         const cpscapi = process.env.ROOT_RECALLS_API;
         const apiRecallURL = cpscapi +
           "latest";
-        const thirdwebsiteurl = window.location.href;
-        const thirdwebsitetitle = document.title;
         vm.resultCount = 0;
         vm.recalls = [];
         console.log(apiRecallURL);
