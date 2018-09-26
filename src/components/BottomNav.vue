@@ -1,12 +1,16 @@
 <template>
   <v-card tile height="50px" flat>
     <v-bottom-nav class="bottomNavControls " active.sync="recent" :value="true" fixed color="blue-grey darken-4">
-       <v-btn color="white" flat @click.stop="toggleDrawer()">
+       <v-btn color="white" flat @click.stop="showSearchComponents()">
         <v-icon>search</v-icon>
       </v-btn>
       <v-btn color="white" flat :value="tiles[0].Title" to="/">
         <v-icon>home</v-icon>
       </v-btn>
+      <v-btn color="white" flat  href="https://www.cpsc.gov">
+        <v-icon>public</v-icon>
+      </v-btn>
+      
     </v-bottom-nav>
   </v-card>
 </template>
@@ -52,8 +56,9 @@
       }
     },
       methods: {
-      toggleDrawer() {
-        this.$root.$emit('drawerClicked', true)
+     
+      showSearchComponents(){
+        this.$router.push("resultList");//show resultlist route
       }
     }
   };

@@ -141,7 +141,6 @@ export default {
     target(){
       let vm = this
       let value = vm.transitionSelector
-      console.log('selector is ' + value)
       if(!isNaN(value)) return Number(value)
       else return value
     },
