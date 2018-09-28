@@ -9,7 +9,11 @@ pipeline {
             }
         }
         stage('Deploy'){
-            bat 'npm run build'
+            
+            steps{
+                echo 'packing and deploying'
+                bat 'npm run build'
+            }
         }
     }
 }
