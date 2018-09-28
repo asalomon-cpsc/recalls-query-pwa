@@ -20,6 +20,7 @@
             <span><a href="mailto:suggestions@cpsc.gov" >Website Feedback</a></span><br>
              This is an official website of the United States government.
             </div>
+            <div>Version: 1.0.0</div>
           </div>
     
 </template>

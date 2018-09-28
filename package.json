@@ -1,15 +1,14 @@
 {
-  "name": "pwa-recalls-app",
+  "name": "cpsc-recalls-app",
   "version": "1.0.0",
   "description": "A progressive web app for consumer product recalls",
   "author": "Salomon <asalomon@cpsc.gov>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
-    "docs:dev": "vuepress dev docs",
     "start": "node build/dev-server.js",
     "build": "node build/build.js",
-    "docs:build": "vuepress build docs"
+    "build-windows": "powershell ./build_windows.ps1 \\\\rmspreprodiweb1\\c$\\inetpub\\wwwroot\\recalls-pwa-app"
   },
   "dependencies": {
     "axios": "^0.18.0",

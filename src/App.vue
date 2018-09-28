@@ -132,30 +132,30 @@
 
         window.addEventListener("appinstalled", event => {
           alert("app successfuly installed");
-           const cpscapi = process.env.ROOT_RECALLS_API;
-           const apiRecallURL = cpscapi +
-          "installinfo";
-          axios.post(cpscapi,{
-          data: {
-	            browser: "chrome",
-              os : resolveOS(),
-              device : "samsung galaxy",
-	            dateTime: moment().format("MMM Do YYYY"),
-	            installStatus: "success"
-            }
-          })
-          .then()
-          .catch()
+          const cpscapi = process.env.ROOT_RECALLS_API;
+          const apiRecallURL = cpscapi +
+            "installinfo";
+          axios.post(cpscapi, {
+              data: {
+                browser: "chrome",
+                os: resolveOS(),
+                device: "samsung galaxy",
+                dateTime: moment().format("MMM Do YYYY"),
+                installStatus: "success"
+              }
+            })
+            .then()
+            .catch()
         });
       });
     },
     methods: {
-      resolveOS(){
+      resolveOS() {
         let OSName = "Unknown";
-        if (navigator.appVersion.indexOf("Win")!=-1) OSName="Windows";
-        if (navigator.appVersion.indexOf("Mac")!=-1) OSName="MacOS";
-        if (navigator.appVersion.indexOf("X11")!=-1) OSName="UNIX";
-        if (navigator.appVersion.indexOf("Linux")!=-1) OSName="Linux";
+        if (navigator.appVersion.indexOf("Win") != -1) OSName = "Windows";
+        if (navigator.appVersion.indexOf("Mac") != -1) OSName = "MacOS";
+        if (navigator.appVersion.indexOf("X11") != -1) OSName = "UNIX";
+        if (navigator.appVersion.indexOf("Linux") != -1) OSName = "Linux";
         return OSName
       },
       showInstallPrompt(e) {
