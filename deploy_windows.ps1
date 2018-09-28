@@ -14,7 +14,7 @@ if(Test-Path $deploydir){
   Write-Output "destination directory exist, deleting..."
   rimraf $deploydir
   Write-Output "destination directory deleted"
-  Write-Output "copying build files to destination directory..."
+  Write-Output "copying build files to destination directory $deploydir..."
   Copy-Item dist -Recurse $deploydir -Force
   Write-Output "deployment complete"
 }
