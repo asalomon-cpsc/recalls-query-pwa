@@ -8,7 +8,7 @@
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
     "build": "node build/build.js",
-    "build-windows": "powershell ./build_windows.ps1 \\\\rmspreprodiweb1\\c$\\inetpub\\wwwroot\\recalls-pwa-app"
+    "build-windows": "powershell ./deploy_windows.ps1 \\\\rmspreprodiweb1\\c$\\inetpub\\wwwroot\\recalls-pwa-app"
   },
   "dependencies": {
     "axios": "^0.18.0",
