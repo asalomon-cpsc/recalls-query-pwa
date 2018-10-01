@@ -23,6 +23,11 @@ if(Test-Path $deploydir){
   #rimraf $deploydir
   Write-Output "destination directory deleted"
   Write-Output "copying build files to destination directory $deploydir"
-  Copy-Item dist -Recurse $deploydir -Force
+  $files = Get-ChildItem  .\dist  
+  foreach ($file in $files){
+   copy-item $file.FullName $deploydir
+  }
+
   Write-Output "deployment complete"
+  
 }
