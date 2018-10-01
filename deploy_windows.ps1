@@ -25,9 +25,9 @@ if(Test-Path $deploydir){
   Write-Host "copying build files to destination directory $deploydir"
   $files = Get-ChildItem .\dist
   foreach ($file in $files){
-   copy-item $file.FullName -Recurse $deploydir
+   copy-item $file.FullName -Recurse $deploydir -Force
   }
 
-  Write-host "deployment complete"
+  
   
 }
