@@ -1,88 +1,132 @@
 <template>
-  
+
   <v-container>
     <v-layout>
       <v-flex>
         <h4 class="grey--text">Latest Recalls</h4>
         <div class="section">
-        <ul id="featured" class="d-flex">
-          <li v-for="(r,index) in latestRecalls" v-bind:key="index">
-            <v-card flat>
-              <v-container fluid grid-list-lg>
-                <v-layout row wrap>
-                  <v-flex>
-                    <v-card color="white" class="dark--text" :href="r.url" target="_blank" ripple>
-                      <v-layout>
-                        <v-flex xs12>
-                          <v-card-media contain :src="r.images[0].url" class="black--text" height="180" aspect-ratio="1">
-                          </v-card-media>
-                        </v-flex>
-                      </v-layout>
-                      <v-divider light></v-divider>
-                      <v-layout row wrap>
-                        <v-card-text>
-                          <div>
-                            <div class="text-truncate">{{r.title}}</div>
-                            <div class="grey--text">Recall Date:{{r.recallDate}}</div>
-                          </div>
-                        </v-card-text>
-                      </v-layout>
-                    </v-card>
-                  </v-flex>
-                </v-layout>
-              </v-container>
-            </v-card>
-          
-          </li>
-        </ul>
-       </div>
-      </v-flex>
-    </v-layout>
-    
-    <v-layout>
-      <v-flex>
-   
-      <h4 class="grey--text">Latest Recalled Children Products</h4>
-  
-     <div class="section">
-    <ul class="app-list-horizontal d-flex">
-     
-      <li v-for="(r,index) in childrensRecalls" v-bind:key="index">
-        
-        <v-card flat :href="r.url" target="_blank">
-          <v-container fluid grid-list-xs>
-            <v-layout row wrap>
-              <v-flex>
-                <v-card  class="dark--text"  raised tile ripple>
-                  <v-layout>
-                    <v-flex xs12>
-
-                      <v-card-media position="left" contain :src="r.images[0].url" class="black--text" height="70"
-                        aspect-ratio="1">
-                      </v-card-media>
-                      <v-divider></v-divider>
-                       <v-card-text >
-                         <div  class="text-truncate">
-                          {{r.productName}}
-                        </div>
-                         <span class="grey--text">Recall Date: {{r.recallDate}}</span>
-                        
-                      </v-card-text>
-                      
+          <ul id="featured" class="d-flex">
+            <li v-for="(r,index) in latestRecalls" v-bind:key="index">
+              <v-card flat>
+                <v-container fluid grid-list-lg>
+                  <v-layout row wrap>
+                    <v-flex>
+                      <v-card color="white" class="dark--text" :href="r.url" target="_blank" ripple>
+                        <v-layout>
+                          <v-flex xs12>
+                            <v-card-media contain :src="r.images[0].url" class="black--text" height="180" aspect-ratio="1">
+                            </v-card-media>
+                          </v-flex>
+                        </v-layout>
+                        <v-divider light></v-divider>
+                        <v-layout row wrap>
+                          <v-card-text>
+                            <div>
+                              <div class="text-truncate">{{r.title}}</div>
+                              <div class="grey--text">Recall Date:{{r.recallDate}}</div>
+                            </div>
+                          </v-card-text>
+                        </v-layout>
+                      </v-card>
                     </v-flex>
                   </v-layout>
-                </v-card>
-              </v-flex>
-            </v-layout>
-          </v-container>
-        </v-card>
+                </v-container>
+              </v-card>
 
-      </li>
-    </ul>
-     </div>
-    </v-flex>
+            </li>
+          </ul>
+        </div>
+      </v-flex>
     </v-layout>
-  
+
+    <v-layout>
+      <v-flex>
+
+        <h4 class="grey--text">Latest Recalled Children Products</h4>
+
+        <div class="section">
+          <ul class="app-list-horizontal d-flex">
+
+            <li v-for="(r,index) in childrensRecalls" v-bind:key="index">
+
+              <v-card flat :href="r.url" target="_blank">
+                <v-container fluid grid-list-xs>
+                  <v-layout row wrap>
+                    <v-flex>
+                      <v-card class="dark--text" raised tile ripple>
+                        <v-layout>
+                          <v-flex xs12>
+
+                            <v-card-media position="left" contain :src="r.images[0].url" class="black--text" height="70"
+                              aspect-ratio="1">
+                            </v-card-media>
+                            <v-divider></v-divider>
+                            <v-card-text>
+                              <div class="text-truncate">
+                                {{r.productName}}
+                              </div>
+                              <span class="grey--text">Recall Date: {{r.recallDate}}</span>
+
+                            </v-card-text>
+
+                          </v-flex>
+                        </v-layout>
+                      </v-card>
+                    </v-flex>
+                  </v-layout>
+                </v-container>
+              </v-card>
+
+            </li>
+          </ul>
+        </div>
+      </v-flex>
+    </v-layout>
+
+    <v-layout>
+      <v-flex>
+
+        <h4 class="grey--text">Latest Fire Related Recalls</h4>
+
+        <div class="section">
+          <ul class="app-list-horizontal d-flex">
+
+            <li v-for="(r,index) in fireRelatedRecalls" v-bind:key="index">
+
+              <v-card flat :href="r.url" target="_blank">
+                <v-container fluid grid-list-xs>
+                  <v-layout row wrap>
+                    <v-flex>
+                      <v-card class="dark--text" raised tile ripple>
+                        <v-layout>
+                          <v-flex xs12>
+
+                            <v-card-media position="left" contain :src="r.images[0].url" class="black--text" height="70"
+                              aspect-ratio="1">
+                            </v-card-media>
+                            <v-divider></v-divider>
+                            <v-card-text>
+                              <div class="text-truncate">
+                                {{r.productName}}
+                              </div>
+                              <span class="grey--text">Recall Date: {{r.recallDate}}</span>
+
+                            </v-card-text>
+
+                          </v-flex>
+                        </v-layout>
+                      </v-card>
+                    </v-flex>
+                  </v-layout>
+                </v-container>
+              </v-card>
+
+            </li>
+          </ul>
+        </div>
+      </v-flex>
+    </v-layout>
+
   </v-container>
 
 
@@ -98,7 +142,8 @@
         recalls: [],
         newRecalls: [],
         childrensRecalls: [],
-        show:false
+        fireRecalls: [],
+        show: false
       };
     },
     computed: {
@@ -107,91 +152,63 @@
       },
       childrenRecalls: function () {
         return this.childrensRecalls.slice(0, 10);
+      },
+      fireRelatedRecalls: function () {
+        return this.fireRecalls.slice(0, 10);
       }
     },
     created: function () {
       //show loading
       let vm = this;
       axios
-        .all([vm.getLatestRecalls(), vm.getChildrensRecalls()])
+        .all([
+          vm.getRecallsByCategory("latest"),
+          vm.getRecallsByCategory("children"),
+          vm.getRecallsByCategory("fire"),
+        ])
         .then(axios.spread());
       //request complete hide loading...
     },
     methods: {
-      getLatestRecalls() {
+        getRecallsByCategory(category) {
         let vm = this;
         const cpscapi = process.env.ROOT_RECALLS_API;
-        const apiRecallURL = cpscapi +
-          "latest";
+        const apiRecallURL = cpscapi + category;
         vm.resultCount = 0;
-        vm.recalls = [];
+       
         console.log(apiRecallURL);
         let requestParams = axios
           .get(apiRecallURL)
           .then(response => {
             if (response.data.resultCount > 0) {
-              vm.handleResponse(response);
-            } else {
-              //vm.showProgress = false;
-              vm.newRecalls = [];
+              vm.handleResponseByCategory(response, category);
             }
           })
           .catch(error => {
             //vm.isError = true;
           });
       },
-      getChildrensRecalls() {
-        let vm = this;
-        const cpscapi = process.env.ROOT_RECALLS_API;
-        const apiRecallURL = cpscapi +
-          "children"
-        vm.resultCount = 0;
-        vm.childrensRecalls = []
-        console.log(apiRecallURL)
-        let requestParams = axios
-          .get(apiRecallURL)
-          .then(response => {
-            if (response.data.resultCount > 0) {
-              vm.handleChildrensResponse(response)
-            } else {
-              //vm.showProgress = false;
-              vm.childrensRecalls = [];
-            }
-          })
-          .catch(error => {
-            //vm.isError = true;
-          });
-      },
-      handleChildrensResponse(response) {
+      handleResponseByCategory(response, category) {
         const vm = this;
         response.data.recalls.forEach(element => {
-          console.log("handling children's");
-          console.log(element.title);
-          vm.childrensRecalls.push({
+          let rec = {
             title: element.title,
             url: element.url,
             recallDate: moment(element.recallDate).format("MMM Do YYYY"),
-            productName:element.products[0].name,
+            productName: element.products[0].name,
             images: element.images, //use array functions to filter
             description: element.description,
             manufacturerCountries: element.manufacturerCountries
-          });
-          vm.resultCount = vm.recalls.length;
-        });
-      },
-      handleResponse(response) {
-        const vm = this;
-        response.data.recalls.forEach(element => {
-          console.log("handling latest");
-
-          vm.newRecalls.push({
-            title: element.title,
-            url: element.url,
-            recallDate: moment(element.recallDate).format("MMM Do YYYY"),
-            images: element.images, //use array functions to filter
-            description: element.description,
-            manufacturerCountries: element.manufacturerCountries
-          });
+          };
+          if (category === "children") {
+            vm.childrensRecalls.push(rec);
+          }
+          if (category === "fire") {
+            vm.fireRecalls.push(rec);
+          }
+          if (category === "latest") {
+            vm.latestRecalls.push(rec);
+          }
           vm.resultCount = vm.recalls.length;
         });
       }
@@ -241,11 +258,12 @@
     padding: 0 15px 20px 35px;
     margin: 0px -20px;
   }
- .section{
+
+  .section {
     margin: 0px;
     padding: 0px;
- }
- 
+  }
+
   body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     -webkit-tap-highlight-color: transparent;
