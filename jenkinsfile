@@ -10,16 +10,16 @@ pipeline {
         }
         stage('Deliver for development') {
             when {
-                branch 'ui-enhancements'  //need to change to development or staging
+                branch 'development'  //need to change to development or staging
             }
             steps {
                echo 'packaging and deploying for development'
                bat 'npm run build'
                bat 'xcopy  dist \\\\rmspreprodweb1\\c$\\inetpub\\wwwroot\\recalls-pwa-api\\wwwroot /f /e /y /S'
-               bat 'xcopy  dist \\\\rmspreprodweb1\\c$\\inetpub\\wwwroot\\recalls-pwa-api\\wwwroot /f /e /y /S'
+               bat 'xcopy  dist \\\\rmspreprodweb2\\c$\\inetpub\\wwwroot\\recalls-pwa-api\\wwwroot /f /e /y /S'
             }
         }
-        stage('Deploy for production') {
+        stage('Deliver for production') {
             when {
                 branch 'production'  
             }
@@ -27,7 +27,7 @@ pipeline {
                echo 'packaging and deploying for production'
                bat 'npm run build'
                bat 'xcopy  dist  \\\\rmsprodweb1\\c$\\inetpub\\wwwroot\\recalls-pwa-api\\wwwroot /f /e /y /S'
-               bat 'xcopy  dist  \\\\rmsprodweb1\\c$\\inetpub\\wwwroot\\recalls-pwa-api\\wwwroot /f /e /y /S'
+               bat 'xcopy  dist  \\\\rmsprodweb2\\c$\\inetpub\\wwwroot\\recalls-pwa-api\\wwwroot /f /e /y /S'
             }
         }
       
