@@ -15,8 +15,8 @@ pipeline {
             steps {
                echo 'packaging and deploying for development'
                bat 'npm run build'
-               bat 'xcopy  /f /e /y  dist   \\\\rmspreprodweb1\\c$\\inetpub\\wwwroot\\recalls-pwa-api\\wwwroot'
-               bat 'xcopy  /f /e /y  dist   \\\\rmspreprodweb2\\c$\\inetpub\\wwwroot\\recalls-pwa-api\\wwwroot'
+               bat 'xcopy  dist \\\\rmspreprodweb1\\c$\\inetpub\\wwwroot\\recalls-pwa-api\\wwwroot /f /e /y /S'
+               bat 'xcopy  dist \\\\rmspreprodweb1\\c$\\inetpub\\wwwroot\\recalls-pwa-api\\wwwroot /f /e /y /S'
             }
         }
         stage('Deploy for production') {
@@ -26,8 +26,8 @@ pipeline {
             steps {
                echo 'packaging and deploying for production'
                bat 'npm run build'
-               bat 'xcopy  /f /e /y  dist   \\\\rmsprodweb1\\c$\\inetpub\\wwwroot\\recalls-pwa-api\\wwwroot'
-               bat 'xcopy  /f /e /y  dist   \\\\rmsprodweb2\\c$\\inetpub\\wwwroot\\recalls-pwa-api\\wwwroot'
+               bat 'xcopy  dist  \\\\rmsprodweb1\\c$\\inetpub\\wwwroot\\recalls-pwa-api\\wwwroot /f /e /y /S'
+               bat 'xcopy  dist  \\\\rmsprodweb1\\c$\\inetpub\\wwwroot\\recalls-pwa-api\\wwwroot /f /e /y /S'
             }
         }
       
