@@ -58,7 +58,7 @@
       methods: {
      
       showSearchComponents(){
-        this.$router.push("resultList");//show resultlist route
+        this.$router.push("resultList")//show resultlist route
       }
     }
   };
