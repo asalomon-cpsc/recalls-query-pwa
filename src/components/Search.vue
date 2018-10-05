@@ -263,7 +263,7 @@ export default {
               vm.formState.started = false;
               vm.formState.completed = true;
               vm.manufacturer="";
-              vm.productTypes="";//need to reset those filter values since they will be invisible but still bound to model
+              vm.productTypes=[];//need to reset those filter values since they will be invisible but still bound to model
               vm.recalls = [];
             }
           })
@@ -292,10 +292,14 @@ export default {
       const vm = this;
       response.data.recalls.forEach(element => {
         element.manufacturers.forEach(m => {
+          if(m.Name!= undefined){
           vm.manufacturers.push(m.Name);
+          }
         });
         element.products.forEach(p => {
+          if(p.Type!= undefined){
           vm.productTypes.push(p.Type);
+          }
         });
         vm.recalls.push({
           title: element.title,
@@ -305,7 +309,7 @@ export default {
           description: element.description,
           products: element.products,
           injuries: element.injuries,
-          manufacturers: element.manufacturers,
+          manufacturers: element.manufacturers? element.manufacturers: [],
           manufacturerCountries: element.manufacturerCountries,
           productUpcs: element.productUPCs,
           hazards: element.hazards,
