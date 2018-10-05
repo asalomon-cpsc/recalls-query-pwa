@@ -10,13 +10,13 @@ pipeline {
         }
         stage('Deliver for development') {
             when {
-                branch 'development'  //need to change to development or staging
+                branch 'development'  
             }
             steps {
                echo 'packaging and deploying for development'
                bat 'npm run build'
-               bat 'robocopy  dist \\\\rmspreprodweb1\\c$\\inetpub\\wwwroot\\recalls-pwa-api\\wwwroot /e /purge'
-               bat 'robocopy  dist \\\\rmspreprodweb2\\c$\\inetpub\\wwwroot\\recalls-pwa-api\\wwwroot /e /purge'
+               bat 'robocopy  dist \\\\rmspreprodweb1\\c$\\inetpub\\wwwroot\\recalls-pwa-api\\wwwroot /purge /e'
+               bat 'robocopy  dist \\\\rmspreprodweb2\\c$\\inetpub\\wwwroot\\recalls-pwa-api\\wwwroot /purge /e'
             }
         }
         stage('Deliver for production') {
@@ -26,8 +26,8 @@ pipeline {
             steps {
                echo 'packaging and deploying for production'
                bat 'npm run build'
-               bat 'robocopy  dist  \\\\rmsprodweb1\\c$\\inetpub\\wwwroot\\recalls-pwa-api\\wwwroot /e /purge'
-               bat 'robocopy  dist  \\\\rmsprodweb2\\c$\\inetpub\\wwwroot\\recalls-pwa-api\\wwwroot /e /purge'
+               bat 'robocopy  dist  \\\\rmsprodweb1\\c$\\inetpub\\wwwroot\\recalls-pwa-api\\wwwroot /purge /e'
+               bat 'robocopy  dist  \\\\rmsprodweb2\\c$\\inetpub\\wwwroot\\recalls-pwa-api\\wwwroot /purge /e'
             }
         }
       
