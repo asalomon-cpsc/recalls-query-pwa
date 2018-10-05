@@ -6,9 +6,7 @@
 
     </v-navigation-drawer>
     <v-toolbar color="indigo darken-1" dark dense app fixed id="toolbar">
-
       <v-toolbar-title v-text="title" color="white">
-
       </v-toolbar-title>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
 
@@ -20,12 +18,10 @@
           lazy>
 
           <v-btn slot="activator" dark flat value="info">
-
             <v-icon color="orange lighten-2">info</v-icon>
           </v-btn>
 
           <v-card raised ripple class=" flex text-xs-center">
-
             <v-card-title primary-title class="justify-center">
               <footer-info> </footer-Info>
             </v-card-title>
@@ -51,12 +47,18 @@
       </keep-alive>
     </v-content>
 
-    <v-fab-transition>
-      <v-btn color="orange darken-4" dark fab fixed bottom right v-show="action" id="btnActionScroll" @click="$vuetify.goTo(target, options)">
-        <v-icon>keyboard_arrow_up</v-icon>
-        <v-icon>close</v-icon>
+
+
+    <v-snackbar v-model="snackbar" :bottom="y === 'bottom'" :left="x === 'left'" :multi-line="mode === 'multi-line'"
+      :right="x === 'right'" :timeout="timeout" :top="y === 'top'" :vertical="mode === 'vertical'">
+      {{ text }}
+      <v-btn color="pink" flat @click="snackbar = false">
+        Close
       </v-btn>
-    </v-fab-transition>
+    </v-snackbar>
+
+
+
 
     <bottom-nav v-if="showOnSmAndDown"></bottom-nav>
     <mfooter v-if="showOnMdAndUp"></mfooter>
@@ -90,7 +92,13 @@
         beforeinstallpromptfired: false,
         deferredPrompt: null,
         sheet: false,
-        drawer: true
+        drawer: true,
+        snackbar: false,
+        y: "top",
+        x: null,
+        mode: "",
+        timeout: 6000,
+        text: "Installed Succesfully On Your Home screen"
       };
     },
     computed: {
@@ -118,9 +126,9 @@
     mounted() {
       const vm = this;
       //register for drawer clicked event
-      vm.$root.$on('drawerClicked', (val) => {
-        vm.drawer = !vm.drawer
-      })
+      vm.$root.$on("drawerClicked", val => {
+        vm.drawer = !vm.drawer;
+      });
       window.addEventListener("beforeinstallprompt", e => {
         // Prevent Chrome 67 and earlier from automatically showing the prompt
         e.preventDefault();
@@ -131,11 +139,9 @@
         vm.beforeinstallpromptfired = true;
 
         window.addEventListener("appinstalled", event => {
-          alert("app successfuly installed");
+          vm.snackbar = true;
           const cpscapi = process.env.ROOT_RECALLS_API;
-          const apiRecallURL = cpscapi +
-            "installinfo";
-          
+          const apiRecallURL = cpscapi + "installinfo";
         });
       });
     },
@@ -146,8 +152,8 @@
         if (navigator.appVersion.indexOf("Mac") != -1) OSName = "MacOS";
         if (navigator.appVersion.indexOf("X11") != -1) OSName = "UNIX";
         if (navigator.appVersion.indexOf("Linux") != -1) OSName = "Linux";
-        console.log('osname is ' + OSName)
-        return OSName
+        console.log("osname is " + OSName);
+        return OSName;
       },
       showInstallPrompt(e) {
         const vm = this;
