@@ -15,8 +15,8 @@ pipeline {
             steps {
                echo 'packaging and deploying for development'
                bat 'npm run build'
-               bat 'robocopy  dist \\\\rmspreprodweb2\\c$\\inetpub\\wwwroot\\recalls-pwa-api\\wwwroot /purge /e'
-               
+               bat 'deploy.cmd development'
+
             }
         }
         stage('Deliver for production') {
@@ -26,8 +26,8 @@ pipeline {
             steps {
                echo 'packaging and deploying for production'
                bat 'npm run build'
-               bat 'robocopy  dist  \\\\rmsprodweb1\\c$\\inetpub\\wwwroot\\recalls-pwa-api\\wwwroot /purge /e'
-               bat 'robocopy  dist  \\\\rmsprodweb2\\c$\\inetpub\\wwwroot\\recalls-pwa-api\\wwwroot /purge /e'
+               bat 'deploy.cmd production'
+               
             }
         }
       
