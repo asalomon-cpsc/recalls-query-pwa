@@ -4,7 +4,8 @@
     <v-layout>
       <v-flex>
         <h4 class="grey--text">Latest Recalls</h4>
-        <div class="section">
+        <v-progress-linear v-if="!latestLoaded" :indeterminate="true"></v-progress-linear>
+        <div v-if="latestLoaded" class="section">
           <ul id="featured" class="d-flex">
             <li v-for="(r,index) in latestRecalls" v-bind:key="index">
               <v-card flat>
@@ -43,9 +44,10 @@
       <v-flex>
 
         <h4 class="grey--text">Latest Recalled Children Products</h4>
-
-        <div class="section">
-          <ul class="app-list-horizontal d-flex">
+       <v-progress-linear v-if="!latestChildrenLoaded" :indeterminate="true"></v-progress-linear>
+           
+        <div class="section" v-if="latestChildrenLoaded">
+          <ul class="d-flex app-list-horizontal">
 
             <li v-for="(r,index) in childrensRecalls" v-bind:key="index">
 
@@ -58,7 +60,7 @@
                           <v-flex xs12>
 
                             <v-card-media position="left" contain :src="r.images[0].url" class="black--text" height="70"
-                              aspect-ratio="1">
+                              :aspect-ratio="1">
                             </v-card-media>
                             <v-divider></v-divider>
                             <v-card-text>
@@ -87,12 +89,10 @@
       <v-flex>
 
         <h4 class="grey--text">Latest Fire Related Recalls</h4>
-
-        <div class="section">
-          <ul class="app-list-horizontal d-flex">
-
+        <v-progress-linear v-if="!latestFireLoaded" :indeterminate="true"></v-progress-linear>
+        <div class="section" v-if="latestFireLoaded">
+          <ul class="d-flex app-list-horizontal">
             <li v-for="(r,index) in fireRelatedRecalls" v-bind:key="index">
-
               <v-card flat :href="r.url" target="_blank">
                 <v-container fluid grid-list-xs>
                   <v-layout row wrap>
@@ -100,9 +100,8 @@
                       <v-card class="dark--text" raised tile ripple>
                         <v-layout>
                           <v-flex xs12>
-
                             <v-card-media position="left" contain :src="r.images[0].url" class="black--text" height="70"
-                              aspect-ratio="1">
+                              :aspect-ratio="16/9">
                             </v-card-media>
                             <v-divider></v-divider>
                             <v-card-text>
@@ -110,9 +109,7 @@
                                 {{r.productName}}
                               </div>
                               <span class="grey--text">Recall Date: {{r.recallDate}}</span>
-
                             </v-card-text>
-
                           </v-flex>
                         </v-layout>
                       </v-card>
@@ -143,7 +140,10 @@
         newRecalls: [],
         childrensRecalls: [],
         fireRecalls: [],
-        show: false
+        show: false,
+        latestLoaded:false,
+        latestChildrenLoaded:false,
+        latestFireLoaded: false
       };
     },
     computed: {
@@ -201,13 +201,17 @@
             manufacturerCountries: element.manufacturerCountries
           };
           if (category === "children") {
-            vm.childrensRecalls.push(rec);
+            vm.childrensRecalls.push(rec)
+            vm.latestChildrenLoaded = true
+            
           }
           if (category === "fire") {
-            vm.fireRecalls.push(rec);
+            vm.fireRecalls.push(rec)
+            vm.latestFireLoaded = true
           }
           if (category === "latest") {
-            vm.latestRecalls.push(rec);
+            vm.latestRecalls.push(rec)
+            vm.latestLoaded = true
           }
           vm.resultCount = vm.recalls.length;
         });
