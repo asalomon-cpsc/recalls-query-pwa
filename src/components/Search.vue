@@ -82,10 +82,13 @@
     
   </v-form>
   </div>
-   <v-alert v-if="!hasResult && formState.completed" color="grey" icon="info" value="true">
+   <v-alert v-if="!hasResult && formState.completed" color="grey"  icon="info" :value="true"
+      type="info"
+      transition="scale-transition">
       No records found
     </v-alert>
-    <v-alert v-else-if=" resultCount > 0 && formState.completed" color="grey" icon="info" value="true">
+    <v-alert v-else-if=" resultCount > 0 && formState.completed" color="grey" icon="info" :value="true"
+      type="info">
       {{resultCount}} record(s) found
     </v-alert>
 
