@@ -15,7 +15,8 @@
   </v-card>
 </template>
 <script>
-  import footerInfo from "./FooterInfo.vue";
+  import footerInfo from "./FooterInfo.vue"
+  import {  EventBus } from "../eventBus.js"
   export default {
     components: {
       footerInfo
@@ -58,6 +59,7 @@
       methods: {
      
       showSearchComponents(){
+        EventBus.$emit("searchNavButtonClicked", true)
         this.$router.push("resultList")//show resultlist route
       }
     }

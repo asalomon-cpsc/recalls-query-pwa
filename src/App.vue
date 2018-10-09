@@ -73,6 +73,9 @@
   import search from "./components/Search.vue";
   import axios from "axios";
   import moment from "moment";
+  import {
+    EventBus
+  } from "./eventBus.js"
   export default {
     components: {
       mfooter,
@@ -125,9 +128,8 @@
 
     mounted() {
       const vm = this;
-      //register for drawer clicked event
-      vm.$root.$on("drawerClicked", val => {
-        vm.drawer = !vm.drawer;
+      EventBus.$on("searchNavButtonClicked", val => {
+        vm.drawer = true
       });
       window.addEventListener("beforeinstallprompt", e => {
         // Prevent Chrome 67 and earlier from automatically showing the prompt
