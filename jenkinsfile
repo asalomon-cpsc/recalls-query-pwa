@@ -30,6 +30,19 @@ pipeline {
                
             }
         }
+        post {
+        always {
+            echo 'Clean Workspace'
+            deleteDir() /* clean up our workspace */
+        }
+        success {
+            echo 'Pipeline completed without errors'
+        }
+        
+        failure {
+            echo 'Completed with Errors'
+        }
+    }
       
     }
 }
