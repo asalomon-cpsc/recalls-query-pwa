@@ -30,7 +30,11 @@ pipeline {
                
             }
         }
-        post {
+        
+      
+    }
+
+    post {
         always {
             echo 'Clean Workspace'
             deleteDir() /* clean up our workspace */
@@ -42,7 +46,5 @@ pipeline {
         failure {
             echo 'Completed with Errors'
         }
-    }
-      
     }
 }
