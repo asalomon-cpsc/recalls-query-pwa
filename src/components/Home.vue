@@ -132,6 +132,7 @@
 <script>
   import axios from "axios";
   import moment from "moment";
+  import {  EventBus } from "../eventBus.js"
   export default {
     name: "home",
     data: function () {
@@ -185,8 +186,13 @@
             }
           })
           .catch(error => {
-            //vm.isError = true;
+            vm.handleError("apiCallErrorOccured",error);
           });
+      },
+      handleError(type, error){
+       EventBus.$emit(type,error);
+       this.$router.push("error")
+       
       },
       handleResponseByCategory(response, category) {
         const vm = this;
