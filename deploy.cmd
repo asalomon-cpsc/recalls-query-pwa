@@ -28,18 +28,18 @@ IF "%build%"=="production" (
 )
 
 SET SOURCE_LOC=".\dist"
-SET DEPLOY_LOC1="\\\\%server1%\\c$\\inetpub\\wwwroot\\recalls-pwa-api\\wwwroot /e /mir /purge"
-SET DEPLOY_LOC2="\\\\%server2%\\c$\\inetpub\\wwwroot\\recalls-pwa-api\\wwwroot /e /mir /purge"
+SET DEPLOY_LOC1="\\\\%server1%\\c$\\inetpub\\wwwroot\\recalls-pwa-api\\wwwroot"
+SET DEPLOY_LOC2="\\\\%server2%\\c$\\inetpub\\wwwroot\\recalls-pwa-api\\wwwroot"
 
 echo ---------------------------------------
-echo Copying to %server2%
+echo Copying to %server1%
 echo ---------------------------------------
-CALL ROBOCOPY  %SOURCE_LOC% %DEPLOY_LOC1% 
+CALL ROBOCOPY  %SOURCE_LOC% %DEPLOY_LOC1% /e /mir /purge
 
 echo ---------------------------------------
 echo Copying to %server2% 
 echo ---------------------------------------
-CALL ROBOCOPY %SOURCE_LOC% %DEPLOY_LOC2% 
+CALL ROBOCOPY %SOURCE_LOC% %DEPLOY_LOC2% /e /mir /purge
 :usage
 echo Error: Incorrect Usage.
 @Echo Correct Usage: %0 [Staging/development/production]
