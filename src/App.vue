@@ -47,8 +47,6 @@
       </keep-alive>
     </v-content>
 
-
-
     <v-snackbar v-model="snackbar" :bottom="y === 'bottom'" :left="x === 'left'" :multi-line="mode === 'multi-line'"
       :right="x === 'right'" :timeout="timeout" :top="y === 'top'" :vertical="mode === 'vertical'">
       {{ text }}
@@ -58,118 +56,154 @@
     </v-snackbar>
 
 
-
-
     <bottom-nav v-if="showOnSmAndDown"></bottom-nav>
     <mfooter v-if="showOnMdAndUp"></mfooter>
 
   </v-app>
 </template>
-
 <script>
-  import bottomNav from "./components/BottomNav.vue";
-  import mfooter from "./components/mFooter.vue";
-  import footerInfo from "./components/FooterInfo.vue";
-  import search from "./components/Search.vue";
-  import axios from "axios";
-  import moment from "moment";
-  import {
-    EventBus
-  } from "./eventBus.js"
-  export default {
-    components: {
-      mfooter,
-      bottomNav,
-      footerInfo,
-      search
+import bottomNav from "./components/BottomNav.vue";
+import mfooter from "./components/mFooter.vue";
+import footerInfo from "./components/FooterInfo.vue";
+import search from "./components/Search.vue";
+import axios from "axios";
+import moment from "moment";
+import {
+  EventBus
+} from "./eventBus.js";
+export default {
+  components: {
+    mfooter,
+    bottomNav,
+    footerInfo,
+    search
+  },
+  name: "App",
+  data() {
+    return {
+      selector: "#content",
+      duration: 300,
+      offset: 15,
+      easing: "easeInOutCubic",
+      title: "CPSC Recalls",
+      action: true,
+      beforeinstallpromptfired: false,
+      deferredPrompt: null,
+      sheet: false,
+      drawer: true,
+      snackbar: false,
+      y: "top",
+      x: null,
+      mode: "",
+      timeout: 6000,
+      text: "Installed Succesfully On Your Home screen"
+    };
+  },
+  computed: {
+    target() {
+      let vm = this;
+      let value = vm.selector;
+      if (!isNaN(value)) return Number(value);
+      else return value;
     },
-    name: "App",
-    data() {
+    options() {
       return {
-        selector: "#content",
-        duration: 300,
-        offset: 15,
-        easing: "easeInOutCubic",
-        title: "CPSC Recalls",
-        action: true,
-        beforeinstallpromptfired: false,
-        deferredPrompt: null,
-        sheet: false,
-        drawer: true,
-        snackbar: false,
-        y: "top",
-        x: null,
-        mode: "",
-        timeout: 6000,
-        text: "Installed Succesfully On Your Home screen"
+        duration: this.duration,
+        offset: this.offset,
+        easing: this.easing
       };
     },
-    computed: {
-      target() {
-        let vm = this;
-        let value = vm.selector;
-        if (!isNaN(value)) return Number(value);
-        else return value;
-      },
-      options() {
-        return {
-          duration: this.duration,
-          offset: this.offset,
-          easing: this.easing
-        };
-      },
-      showOnMdAndUp() {
-        return this.$vuetify.breakpoint.mdAndUp;
-      },
-      showOnSmAndDown() {
-        return this.$vuetify.breakpoint.smAndDown;
-      }
+    showOnMdAndUp() {
+      return this.$vuetify.breakpoint.mdAndUp;
     },
-
-    mounted() {
-      const vm = this;
-      EventBus.$on("searchNavButtonClicked", val => {
-        vm.drawer = true
-      });
-      window.addEventListener("beforeinstallprompt", e => {
-        // Prevent Chrome 67 and earlier from automatically showing the prompt
-        e.preventDefault();
-
-        // Stash the event so it can be triggered later.
-        vm.deferredPrompt = e;
-        //show install button
-        vm.beforeinstallpromptfired = true;
-
-        window.addEventListener("appinstalled", event => {
-          vm.snackbar = true;
-          const cpscapi = process.env.ROOT_RECALLS_API;
-          const apiRecallURL = cpscapi + "installinfo";
-        });
-      });
-    },
-    methods: {
-      resolveOS() {
-        let OSName = "Unknown";
-        if (navigator.appVersion.indexOf("Win") != -1) OSName = "Windows";
-        if (navigator.appVersion.indexOf("Mac") != -1) OSName = "MacOS";
-        if (navigator.appVersion.indexOf("X11") != -1) OSName = "UNIX";
-        if (navigator.appVersion.indexOf("Linux") != -1) OSName = "Linux";
-        console.log("osname is " + OSName);
-        return OSName;
-      },
-      showInstallPrompt(e) {
-        const vm = this;
-
-        vm.beforeinstallpromptfired = false;
-        vm.deferredPrompt.prompt();
-        vm.deferredPrompt.userChoice.then(choiceResult => {
-          if (choiceResult.outcome === "accepted") {} else {
-            //TODO: what action to take if user dismissed prompt?
-          }
-          vm.deferredPrompt = null;
-        });
-      }
+    showOnSmAndDown() {
+      return this.$vuetify.breakpoint.smAndDown;
     }
-  };
+  },
 
+  mounted() {
+    const vm = this;
+    EventBus.$on("searchNavButtonClicked", val => {
+      vm.drawer = true;
+    });
+    window.addEventListener("beforeinstallprompt", e => {
+      // Prevent Chrome 67 and earlier from automatically showing the
+      prompt
+      e.preventDefault();
+
+      // Stash the event so it can be triggered later.
+      vm.deferredPrompt = e;
+      //show install button
+      vm.beforeinstallpromptfired = true;
+
+      window.addEventListener("appinstalled", event => {
+        vm.snackbar = true;
+        const cpscapi = process.env.ROOT_RECALLS_API;
+        const apiInstallInfoURL = cpscapi + "installinfo";
+        let mobileOS = vm.getMobileOperatingSystem();
+        axios
+          .post(apiInstallInfoURL, {
+            data: {
+              Browser: "N/A",
+              OS: mobileOS,
+              Device: "N/A",
+              Date: moment().format("MMM Do YYYY"),
+              InstallStatus: "Success"
+            },
+            withCredentials: false
+          })
+          .catch(error => {
+            //DO handle error
+          });
+      });
+    });
+  },
+  methods: {
+    /**
+    * Determine the mobile operating system.
+    * This function returns one of 'iOS', 'Android', 'Windows Phone',
+    or 'unknown'.
+    * @returns {String}
+    */
+    getMobileOperatingSystem() {
+
+      try {
+        if (process.browser) {
+          var userAgent = navigator.userAgent || navigator.vendor ||
+            window.opera;
+          // Windows Phone must come first because its UA also contains "Android"
+          if (/windows phone/i.test(userAgent)) {
+            return "Windows Phone";
+          }
+
+          if (/android/i.test(userAgent)) {
+            return "Android";
+          }
+
+          // iOS detection
+          if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+            return "iOS";
+          }
+        }
+      } catch (error) {
+        console.log("cannot get mobile OS")
+      }
+
+
+      return "unknown";
+    },
+    showInstallPrompt(e) {
+      const vm = this;
+
+      vm.beforeinstallpromptfired = false;
+      vm.deferredPrompt.prompt();
+      vm.deferredPrompt.userChoice.then(choiceResult => {
+        if (choiceResult.outcome === "accepted") {} else {
+          //TODO: what action to take if user dismissed prompt?
+        }
+        vm.deferredPrompt = null;
+      });
+    }
+  }
+};
 </script>
