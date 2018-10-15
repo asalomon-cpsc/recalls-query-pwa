@@ -26,7 +26,7 @@
                               <div class="grey--text"><strong>Recall Date:</strong>:{{r.recallDate}}</div>
                               <div class="text-truncate">{{r.title}}</div>
                               
-                              <div class="text-truncate"><strong>Product: </strong>{{r.productName}}</div>
+                              <div  class="text-truncate"><strong>Product: </strong>{{r.productName}}</div>
                               <div class="text-truncate"><strong>Manufacturer:</strong> {{r.manufacturer}}</div>
                               <div class="grey--text"><strong>Recall Date:</strong>:{{r.recallDate}}</div>
                             </div>
@@ -116,7 +116,7 @@ export default {
       show: false,
       latestLoaded: false,
       latestChildrenLoaded: false
-      
+    
     };
   },
   computed: {
