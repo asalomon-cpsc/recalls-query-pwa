@@ -8,7 +8,7 @@
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
     "build": "node build/build.js",
-    "build-windows": "powershell ./deploy_windows.ps1 \\\\rmspreprodiweb1\\c$\\inetpub\\wwwroot\\recalls-pwa-api\\wwwroot" 
+    "deploy-windows": "deploy.cmd development" 
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -51,7 +51,6 @@
     "vue-loader": "^13.3.0",
     "vue-style-loader": "^3.0.3",
     "vue-template-compiler": "^2.5.2",
-    "vuepress": "^0.14.2",
     "webpack": "^3.7.1",
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-middleware": "^1.12.0",
