@@ -12,7 +12,7 @@
                 <v-container fluid grid-list-lg>
                   <v-layout row wrap>
                     <v-flex>
-                      <v-card color="grey lighten-4" class="dark--text" :href="r.url" target="_blank" ripple height="480">
+                      <v-card color="grey lighten-4" class="dark--text" :href="r.url" target="_blank" ripple height="535">
                         <v-layout>
                           <v-flex xs12>
                             <v-card-media contain :src="r.images[0].url" class="black--text" height="280" aspect-ratio="1">
@@ -23,12 +23,25 @@
                         <v-layout row wrap>
                           <v-card-text >
                             <div>
-                              <div class="grey--text"><strong>Recall Date:</strong>:{{r.recallDate}}</div>
-                              <div class="text-truncate">{{r.title}}</div>
+                              <div class="text-truncate"><strong>Title:</strong>
+                                  <br>
+                              <span>{{r.title}}</span>
+                           
+                               </div>
+                              <div class="text-truncate"><strong>Recall Date:</strong>
+                                  <br>
+                               <span>{{r.recallDate}}</span>
+                              </div>
+                              <div  class="text-truncate"><strong>Product: </strong>
+                              <br>
+                              <span>{{r.productName}}</span></div>
+                              <div class="text-truncate"><strong>Manufacturer:</strong> 
+                                  <br>
+                              <span>{{r.manufacturer}}
+
+                                </span>
+                              </div>
                               
-                              <div  class="text-truncate"><strong>Product: </strong>{{r.productName}}</div>
-                              <div class="text-truncate"><strong>Manufacturer:</strong> {{r.manufacturer}}</div>
-                              <div class="grey--text"><strong>Recall Date:</strong>:{{r.recallDate}}</div>
                             </div>
                           </v-card-text>
                           
@@ -116,24 +129,21 @@ export default {
       show: false,
       latestLoaded: false,
       latestChildrenLoaded: false
-    
     };
   },
   computed: {
     latestRecalls: function() {
       return this.newRecalls;
     }
-    },
-  
-   
+  },
+
   mounted: function() {
     //show loading
     let vm = this;
     vm.getRecalls();
-    
   },
   methods: {
-     getChildrenRecalls() {
+    getChildrenRecalls() {
       let vm = this;
       let childrenKeyWords = [
         "toys",
@@ -145,34 +155,36 @@ export default {
       ];
       var recall = null;
       let recallsMap = new Map();
-       console.log("latest recalls count is :" + this.latestRecalls.length)
-      
-        childrenKeyWords.forEach(k => {
-          vm.latestRecalls.forEach(r => {
-            recall = r;
+ 
+
+      childrenKeyWords.forEach(k => {
+        vm.latestRecalls.forEach(r => {
+          recall = r;
           if (recall.description) {
-            if (recall.description.includes(k)&& !recallsMap.has(recall.Number) && recallsMap.size< 15) {
-              recallsMap.set(recall.recallNumber,recall)
-            }else{
-              console.log(recall.description + "does not contain " + k)
+            if (
+              recall.description.includes(k) &&
+              !recallsMap.has(recall.Number) &&
+              recallsMap.size < 15
+            ) {
+              recallsMap.set(recall.recallNumber, recall);
+            } else {
+              
             }
           }
         });
       });
-      recallsMap.forEach((value,key,map)=>{
-        vm.newChildrenRecalls.push(value)
-      })
-      console.log("children recalls count is :" + vm.newChildrenRecalls.length)
+      recallsMap.forEach((value, key, map) => {
+        vm.newChildrenRecalls.push(value);
+      });
+    
       return vm.newChildrenRecalls.slice(0, 10);
     },
-  
+
     getRecalls() {
       let vm = this;
       const cpscapi = process.env.ROOT_RECALLS_API;
       const apiRecallURL = cpscapi + "latest";
       vm.resultCount = 0;
-
-      console.log(apiRecallURL);
       let requestParams = axios
         .get(apiRecallURL)
         .then(response => {
@@ -182,7 +194,7 @@ export default {
         })
         .catch(error => {
           vm.handleError("apiCallErrorOccured", error);
-          console.log(error)
+          
         });
     },
     handleError(type, error) {
@@ -192,15 +204,18 @@ export default {
 
     handleResponse(response) {
       const vm = this;
-      
+
       response.data.recalls.forEach(element => {
-        console.log(element.manufacturers)
+   
         let rec = {
           title: element.title,
           url: element.url,
           recallDate: moment(element.recallDate).format("MMM Do YYYY"),
           productName: element.products[0].name,
-          manufacturer: element.manufacturers.length>0?element.manufacturers[0].name:"view details",
+          manufacturer:
+            element.manufacturers.length > 0
+              ? element.manufacturers[0].name
+              : "Click On The View Details link for more info",
           images: element.images, //use array functions to filter
           description: element.description
         };
@@ -211,7 +226,6 @@ export default {
       vm.resultCount = vm.recalls.length;
       //vm.getChildrenRecalls();
       //vm.latestChildrenLoaded = true;
-      
     }
   }
 };
