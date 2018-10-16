@@ -181,9 +181,6 @@ export default {
       isError: false
     };
   },
-  mounted: function() {
-    console.log("has result", this.hasResult);
-  },
   computed: {
     hasResult: function() {
       return this.resultCount > 0 ? true : false;
@@ -295,13 +292,13 @@ export default {
       const vm = this;
       response.data.recalls.forEach(element => {
         element.manufacturers.forEach(m => {
-          if(m.Name!= undefined){
-          vm.manufacturers.push(m.Name);
+          if(m.name!= undefined){
+          vm.manufacturers.push(m.name);
           }
         });
         element.products.forEach(p => {
-          if(p.Type!= undefined){
-          vm.productTypes.push(p.Type);
+          if(p.type!= undefined){
+          vm.productTypes.push(p.type);
           }
         });
         vm.recalls.push({
