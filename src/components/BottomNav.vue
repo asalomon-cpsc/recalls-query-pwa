@@ -57,10 +57,11 @@
       }
     },
       methods: {
-     
+     //emit click event 
+     //show resultlist route because users may want to navigate back to resultlist from home
       showSearchComponents(){
         EventBus.$emit("searchNavButtonClicked", true)
-        this.$router.push("resultList")//show resultlist route
+        this.$router.push("resultList")
       }
     }
   };
