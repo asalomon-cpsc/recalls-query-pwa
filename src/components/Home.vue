@@ -1,7 +1,7 @@
 <template>
 
   <v-container>
-    <v-layout>
+    <v-layout row wrap>
       <v-flex>
         <h4 class="grey--text">Latest Recalls</h4>
         <v-progress-linear v-if="!latestLoaded" :indeterminate="true"></v-progress-linear>
@@ -10,22 +10,22 @@
             <li v-for="(r,index) in latestRecalls" v-bind:key="index">
               <v-card flat>
                 <v-container fluid grid-list-lg>
-                  <v-layout row wrap>
+                  <v-layout >
                     <v-flex>
-                      <v-card color="grey lighten-4" class="dark--text" :href="r.url" target="_blank" ripple height="535">
-                        <v-layout>
-                          <v-flex xs12>
+                      <v-card color="grey lighten-4" class="dark--text"  ripple>
+                        
+                         
                             <v-card-media contain :src="r.images[0].url" class="black--text" height="280" aspect-ratio="1">
                             </v-card-media>
-                          </v-flex>
-                        </v-layout>
+                         
+                      
                         <v-divider light></v-divider>
-                        <v-layout row wrap>
+                       
                           <v-card-text >
                             <div>
                               <div class="text-truncate"><strong>Title:</strong>
                                   <br>
-                              <span>{{r.title}}</span>
+                              <span>{{index}}-{{r.title}}</span>
                            
                                </div>
                               <div class="text-truncate"><strong>Recall Date:</strong>
@@ -45,11 +45,21 @@
                             </div>
                           </v-card-text>
                           
-                        </v-layout>
-                        <v-card-actions>
-                        <v-btn flat dark color="orange" :href="r.url">View Details</v-btn>
                         
+                        <v-card-actions>
+                        <v-btn  round raised ripple outline flat dark color="orange" :href="r.url">View Details</v-btn>
+                        <v-spacer></v-spacer>
+                        <v-btn large  round raised ripple outline   icon @click="showDetails =!showDetails">
+                        <v-icon>{{ showDetails? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
+                        
+                        </v-btn>
                         </v-card-actions>
+
+                        <v-slide-y-transition>
+                           <v-card-text v-show="showDetails">
+                             {{r.description}}
+                           </v-card-text>
+                        </v-slide-y-transition>
                       </v-card>
                     </v-flex>
                   </v-layout>
@@ -127,6 +137,7 @@ export default {
       newChildrenRecalls: [],
       fireRecalls: [],
       show: false,
+      showDetails:false,
       latestLoaded: false,
       latestChildrenLoaded: false
     };
@@ -135,51 +146,15 @@ export default {
     latestRecalls: function() {
       return this.newRecalls;
     }
+   
   },
-
+  
   mounted: function() {
-    //show loading
     let vm = this;
     vm.getRecalls();
   },
   methods: {
-    getChildrenRecalls() {
-      let vm = this;
-      let childrenKeyWords = [
-        "toys",
-        "baby",
-        "infant",
-        "children",
-        "toddler",
-        "kids"
-      ];
-      var recall = null;
-      let recallsMap = new Map();
- 
-
-      childrenKeyWords.forEach(k => {
-        vm.latestRecalls.forEach(r => {
-          recall = r;
-          if (recall.description) {
-            if (
-              recall.description.includes(k) &&
-              !recallsMap.has(recall.Number) &&
-              recallsMap.size < 15
-            ) {
-              recallsMap.set(recall.recallNumber, recall);
-            } else {
-              
-            }
-          }
-        });
-      });
-      recallsMap.forEach((value, key, map) => {
-        vm.newChildrenRecalls.push(value);
-      });
-    
-      return vm.newChildrenRecalls.slice(0, 10);
-    },
-
+  
     getRecalls() {
       let vm = this;
       const cpscapi = process.env.ROOT_RECALLS_API;
@@ -194,7 +169,6 @@ export default {
         })
         .catch(error => {
           vm.handleError("apiCallErrorOccured", error);
-          
         });
     },
     handleError(type, error) {
@@ -206,7 +180,6 @@ export default {
       const vm = this;
 
       response.data.recalls.forEach(element => {
-   
         let rec = {
           title: element.title,
           url: element.url,
@@ -215,7 +188,7 @@ export default {
           manufacturer:
             element.manufacturers.length > 0
               ? element.manufacturers[0].name
-              : "Click On The View Details link for more info",
+              : "N/A",
           images: element.images, //use array functions to filter
           description: element.description
         };
@@ -236,7 +209,7 @@ ul#featured {
   scroll-snap-type: x mandatory;
   -webkit-scroll-snap-points-x: repeat(100%);
   scroll-snap-points-x: repeat(100%);
-  white-space: nowrap;
+  white-space: wrap;
   list-style: none;
   margin: 0 -20px 0 -20px;
   overflow-x: scroll;
