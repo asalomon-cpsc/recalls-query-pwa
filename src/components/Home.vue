@@ -13,19 +13,15 @@
                   <v-layout >
                     <v-flex>
                       <v-card color="grey lighten-4" class="dark--text"  ripple>
-                        
-                         
                             <v-card-media contain :src="r.images[0].url" class="black--text" height="280" aspect-ratio="1">
                             </v-card-media>
-                         
-                      
                         <v-divider light></v-divider>
                        
                           <v-card-text >
                             <div>
                               <div class="text-truncate"><strong>Title:</strong>
                                   <br>
-                              <span>{{index}}-{{r.title}}</span>
+                              <span>{{r.title}}</span>
                            
                                </div>
                               <div class="text-truncate"><strong>Recall Date:</strong>
@@ -71,54 +67,6 @@
         </div>
       </v-flex>
     </v-layout>
-
-   <!-- <v-layout>
-      <v-flex>
-
-        <h4 class="grey--text">Latest Recalled Children Products</h4>
-       <v-progress-linear v-if="!latestChildrenLoaded" :indeterminate="true"></v-progress-linear>
-           
-        <div class="section" v-show="latestChildrenLoaded">
-          <ul class="d-flex app-list-horizontal">
-
-            <li v-for="(r,index) in newChildrenRecalls" v-bind:key="index">
-
-              <v-card flat :href="r.url" target="_blank">
-                <v-container fluid grid-list-xs>
-                  <v-layout row wrap>
-                    <v-flex>
-                      <v-card class="dark--text" raised tile ripple>
-                        <v-layout>
-                          <v-flex xs12>
-
-                            <v-card-media position="left" contain :src="r.images[0].url" class="black--text" height="70"
-                              :aspect-ratio="1">
-                            </v-card-media>
-                            <v-divider></v-divider>
-                            <v-card-text>
-                              <div class="text-truncate">
-                                {{r.productName}}
-                              </div>
-                              <span class="grey--text">Recall Date: {{r.recallDate}}</span>
-
-                            </v-card-text>
-
-                          </v-flex>
-                        </v-layout>
-                      </v-card>
-                    </v-flex>
-                  </v-layout>
-                </v-container>
-              </v-card>
-
-            </li>
-          </ul>
-        </div>
-      </v-flex>
-    </v-layout>-->
-
-   
-
   </v-container>
 
 
