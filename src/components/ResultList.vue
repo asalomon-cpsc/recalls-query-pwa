@@ -47,7 +47,6 @@
               <br/>
               <span><strong>Name: </strong> {{p.name}}</span><br/>
               <span><strong>Type: </strong> {{p.type}}</span><br/>
-              <span><strong>Model: </strong> {{p.model}}</span><br/>
               <span><strong>No Of Units: </strong> {{p.numberOfUnits}}</span><br/>
             </div><br/>
             
