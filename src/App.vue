@@ -128,7 +128,7 @@ export default {
     });
     window.addEventListener("beforeinstallprompt", e => {
       // Prevent Chrome 67 and earlier from automatically showing the
-      prompt
+      console.log('beforeinstallprompt event fired')
       e.preventDefault();
 
       // Stash the event so it can be triggered later.
@@ -160,39 +160,7 @@ export default {
     });
   },
   methods: {
-    /**
-    * Determine the mobile operating system.
-    * This function returns one of 'iOS', 'Android', 'Windows Phone',
-    or 'unknown'.
-    * @returns {String}
-    */
-    getMobileOperatingSystem() {
-
-      try {
-        if (process.browser) {
-          var userAgent = navigator.userAgent || navigator.vendor ||
-            window.opera;
-          // Windows Phone must come first because its UA also contains "Android"
-          if (/windows phone/i.test(userAgent)) {
-            return "Windows Phone";
-          }
-
-          if (/android/i.test(userAgent)) {
-            return "Android";
-          }
-
-          // iOS detection
-          if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-            return "iOS";
-          }
-        }
-      } catch (error) {
-        console.log("cannot get mobile OS")
-      }
-
-
-      return "unknown";
-    },
+   
     showInstallPrompt(e) {
       const vm = this;
 
