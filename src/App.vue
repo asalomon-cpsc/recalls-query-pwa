@@ -138,14 +138,14 @@ export default {
 
       window.addEventListener("appinstalled", event => {
         vm.snackbar = true;
-        const cpscapi = process.env.ROOT_RECALLS_API;
+        const cpscapi = process.env.ROOT_STATS_API;
         const apiInstallInfoURL = cpscapi + "installinfo";
         let mobileOS = vm.getMobileOperatingSystem();
         axios
           .post(apiInstallInfoURL, {
             data: {
               Browser: "N/A",
-              OS: mobileOS,
+              OS: mobileOS?mobileOS:"unknown",
               Device: "N/A",
               Date: moment().format("MMM Do YYYY"),
               InstallStatus: "Success"
@@ -154,6 +154,7 @@ export default {
           })
           .catch(error => {
             //DO handle error
+            console.log(error)
           });
       });
     });

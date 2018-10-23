@@ -30,12 +30,26 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      // proxy all requests starting with /api 
-      '/api': {
-        target: 'http://localhost:5000/api',
+      // proxy all requests starting with ...
+      '/recall': {
+        target: 'http://localhost:5000/recall',
         changeOrigin: true,
         pathRewrite: {
-          '^/api': ''
+          '^/recall': ''
+        }
+      },
+      '/stats': {
+        target: 'http://localhost:5000/stats',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/stats': ''
+        }
+      },
+      '/error': {
+        target: 'http://localhost:5000/error',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/error': ''
         }
       }
     },
