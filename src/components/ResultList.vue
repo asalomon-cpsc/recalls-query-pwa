@@ -6,10 +6,10 @@
       <v-list three-line >
         
           <v-subheader>Recalls ({{recalls?recalls.length:0}})</v-subheader>
-           <template v-for="(item,index) in recalls" >
+           <template v-for="(item,index) in recalls"  >
             
            
-           <v-card active-class="warning" hover raised v-bind:key="index">
+           <v-card active-class="warning" hover raised v-bind:key="item.recallNumber">
             <v-list-tile  v-bind:size="thumbSize"  ripple  v-bind:key="index" >
                  <a v-bind:href="avatarUrl(item)" target="_blank">
                   <v-list-tile-avatar tile size="55"  >
@@ -40,7 +40,8 @@
         <v-card-text class="grey lighten-3" >
           <h4>Description</h4>
           <p>{{item.description}}</p>
-          
+           <h4>Recall Number</h4>
+           <p>{{item.recallNumber}}</p>
           <h4>Products</h4>
           
             <div v-for="p in item.products" :key="p.name">
@@ -51,8 +52,8 @@
             </div><br/>
             
             <h4>Injuries</h4>
-             <span v-for="p in item.injuries" :key="p.name">
-              <p>{{p.name}}</p>
+             <span v-for="i in item.injuries" :key="i.name">
+              <p>{{i.name}}</p>
             </span><br/>
           <h4>Manufacturers</h4>
             
@@ -65,7 +66,7 @@
               <p>{{mc.country}}</p>
             </span><br/>
             <h4>ProductUpcs</h4>
-            <span  v-for="upc in item.productUpcs" :key="upc.uPC">
+            <span  v-for="upc in item.productUpcs" :key="upc.upc">
               {{upc.upc}}
               </span><br/>
             <h4>Hazards</h4>
@@ -78,7 +79,7 @@
             </span><br/>
             <h4>Retailers</h4>
             
-             <span v-for="ret in item.retailers" :key="ret.name">
+             <span v-for="ret in item.retailers" :key="">
               <p>{{ret.name}}</p>
             </span><br/>
 
@@ -122,6 +123,7 @@ export default {
     setThumbSize() {
       this.thumbSize = "60";
     }
+    
   },
   watch: {
      },
