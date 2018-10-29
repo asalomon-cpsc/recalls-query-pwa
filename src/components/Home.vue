@@ -13,7 +13,7 @@
                   <v-layout >
                     <v-flex>
                       <v-card color="grey lighten-4" class="dark--text"  ripple>
-                            <v-card-media contain :src="r.images[0].url" class="black--text" height="280" aspect-ratio="1">
+                            <v-card-media contain :src="r.images[0].url" class="black--text" height="240" aspect-ratio="1">
                             </v-card-media>
                         <v-divider light></v-divider>
                        
@@ -46,7 +46,7 @@
                         <v-btn  round raised ripple outline flat dark color="orange" :href="r.url">View Details</v-btn>
                         <v-spacer></v-spacer>
                         <v-btn large  round raised ripple outline   icon @click="showDetails =!showDetails">
-                        <v-icon>{{ showDetails? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
+                        <v-icon>{{ !showDetails? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
                         
                         </v-btn>
                         </v-card-actions>
@@ -111,6 +111,7 @@ export default {
       let requestParams = axios
         .get(apiRecallURL)
         .then(response => {
+          console.log(response)
           if (response.data.resultCount > 0) {
             vm.handleResponse(response);
           }
