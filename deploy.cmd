@@ -28,8 +28,8 @@ IF "%build%"=="production" (
 )
 
 SET SOURCE_LOC=".\dist"
-SET DEPLOY_LOC1="\\\\%server1%\\c$\\inetpub\\wwwroot\\recalls-pwa-api\\wwwroot"
-SET DEPLOY_LOC2="\\\\%server2%\\c$\\inetpub\\wwwroot\\recalls-pwa-api\\wwwroot"
+SET DEPLOY_LOC1="\\\\%server1%\\c$\\inetpub\\wwwroot\\recalls-pwa-api-win\\dist"
+SET DEPLOY_LOC2="\\\\%server2%\\c$\\inetpub\\wwwroot\\recalls-pwa-api-win\\dist"
 
 echo ---------------------------------------
 echo Copying to %server1%
