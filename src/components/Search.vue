@@ -175,7 +175,6 @@ export default {
           url: ""
         }
       ],
-      thirdwebsiteurl: "",
       showFormValidDialog: false,
       resultCount: 0,
       isError: false
@@ -198,7 +197,8 @@ export default {
         (vm.manufacturer !== undefined && vm.manufacturer !== "") ||
         (vm.productModel !== undefined && vm.productModel !== "") ||
         (vm.productType !== undefined && vm.productType !== "") ||
-        (vm.relativeDate !== undefined && vm.relativeDate !== "")
+        (vm.relativeDate !== undefined && vm.relativeDate !== ""&& vm.relativeDate > 0
+        )
       );
     }
   },
@@ -223,7 +223,7 @@ export default {
           .format("YYYY-MM-DD");
       } else {
         vm.recallDates.recallEndDate = "";
-        vm.recallDates.recallStartDate = "";
+        vm.recallDates.recallStartDate = "1970-01-01"; 
       }
     },
     submit() {
@@ -246,7 +246,7 @@ export default {
         let requestParams = axios
           .post(apiRecallURL, {
             data: mappedRequest,
-            withCredentials: false
+            withcredentials: false
           })
           .then(response => {
             
@@ -285,7 +285,7 @@ export default {
         productModel: vm.productModel ? vm.productModel : "",
         recallDateEnd: vm.relativeDate > 0 ? vm.recallDates.recallEndDate : "",
         recallDateStart:
-          vm.relativeDate > 0 ? vm.recallDates.recallStartDate : "",
+          vm.relativeDate > 0 ? vm.recallDates.recallStartDate : "1970-01-01",
       };
     },
     handleResponse(response) {
@@ -303,6 +303,7 @@ export default {
         });
         vm.recalls.push({
           title: element.title,
+          recallNumber:vm.formatRecallNumber(element.recallNumber),
           url: element.url,
           recallDate: moment(element.recallDate).format("MMM Do YYYY"),
           images: element.images, //use array functions to filter
@@ -320,6 +321,10 @@ export default {
       });
 
       vm.formState.completed = true;
+    },
+    formatRecallNumber(recallNumber){
+      let formattedNumber = recallNumber?recallNumber.substring(0,2).concat('-',recallNumber.substring(2,recallNumber.length)):'00-00000'
+      return formattedNumber
     },
     clear() {
       this.$refs.form.reset();
