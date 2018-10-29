@@ -30,27 +30,15 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      // proxy all requests starting with ...
-      '/recall': {
-        target: 'http://localhost:5000/recall',
+      // proxy all requests starting with /api to target
+      '/api': {
+        target: 'http://localhost/recallMicroservice_Windows',
         changeOrigin: true,
         pathRewrite: {
-          '^/recall': ''
-        }
+          '^/api': ''
+        
       },
-      '/stats': {
-        target: 'http://localhost:5000/stats',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/stats': ''
-        }
-      },
-      '/error': {
-        target: 'http://localhost:5000/error',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/error': ''
-        }
+     
       }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
