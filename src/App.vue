@@ -30,7 +30,7 @@
 
         </v-bottom-sheet>
         <v-btn small round color="orange darken-4" v-if="beforeinstallpromptfired" @click="showInstallPrompt($event)">
-          <v-icon>add_to_home_screen</v-icon>
+          <v-icon>add</v-icon>
           install
         </v-btn>
         <v-btn icon round color="white">
@@ -96,7 +96,7 @@ export default {
       x: null,
       mode: "",
       timeout: 6000,
-      text: "Installed Succesfully On Your Home screen"
+      text: "Installed Succesfully! The app is now available on your home screen"
     };
   },
   computed: {
