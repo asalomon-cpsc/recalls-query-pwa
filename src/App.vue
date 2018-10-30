@@ -140,12 +140,11 @@ export default {
         vm.snackbar = true;
         const cpscapi = process.env.ROOT_STATS_API;
         const apiInstallInfoURL = cpscapi + "installinfo";
-        let mobileOS = vm.getMobileOperatingSystem();
         axios
           .post(apiInstallInfoURL, {
             data: {
               Browser: "N/A",
-              OS: mobileOS?mobileOS:"unknown",
+              OS: "unknown",
               Device: "N/A",
               Date: moment().format("MMM Do YYYY"),
               InstallStatus: "Success"
