@@ -9,7 +9,7 @@
            <template v-for="(item,index) in recalls"  >
             
            
-           <v-card active-class="warning" hover raised v-bind:key="item.recallNumber">
+           <v-card active-class="warning" hover raised v-bind:key="item.recallNumber" class="mb-1">
             <v-list-tile  v-bind:size="thumbSize"  ripple  v-bind:key="index" >
                  <a v-bind:href="avatarUrl(item)" target="_blank">
                   <v-list-tile-avatar tile size="55"  >
