@@ -16,7 +16,7 @@
           </v-avatar>
         </v-btn>
            <div>
-            <span >Contact Us: 800-638-2772 (TTY 301-595-7054) Toll Free Consumer Hotline | Time: 8 a.m. - 5.30. p.m. ET</span><br>
+            <span >Contact Us: 800-638-2772 (TTY 800-638-8270) Toll Free Consumer Hotline | Time: 8 a.m. - 5.30. p.m. ET</span><br>
             <span><a href="mailto:suggestions@cpsc.gov" >Website Feedback</a></span><br>
              This is an official website of the United States government.
             </div>
