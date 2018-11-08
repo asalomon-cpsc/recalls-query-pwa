@@ -26,9 +26,8 @@
     
     <v-select
     v-show="hasResult"
+    :disabled="formState.cleared && !manufacturers.length>0"
      append-icon="business"
-    
-      :disabled="formState.cleared && !manufacturers.length>0"
       label="Manufacture"
       v-model="manufacturer"
       :items="manufacturers"
@@ -57,11 +56,11 @@
       label="Date Range"
       v-model="relativeDate"
       :items="relativeDates"
-      :value="relativeDate"
+      
       clearable
     ></v-select>
 
-    <v-btn  small round  @click.prevent="clear" color="indigo darken-1" dark   >
+    <v-btn  small round  @click="clear()" color="indigo darken-1" dark   >
       Reset
       <v-icon color="orange lighten-2" right>refresh</v-icon>
       </v-btn>
@@ -290,6 +289,9 @@ export default {
     },
     handleResponse(response) {
       const vm = this;
+      //clear dropdowns
+      vm.manufacturers=[]
+      vm.productTypes=[]
       response.data.recalls.forEach(element => {
         element.manufacturers.forEach(m => {
           if(m.name!= undefined){
@@ -328,6 +330,8 @@ export default {
     },
     clear() {
       this.$refs.form.reset();
+      this.productTypes=[]
+      this.manufacturers=[]
       this.resultCount = 0;
       this.showProgress = false;
       this.isError = false;
