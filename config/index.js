@@ -32,7 +32,7 @@ module.exports = {
     proxyTable: {
       // proxy all requests starting with /api to target
       '/api': {
-        target: 'http://localhost/recallMicroservice_Windows',
+        target: 'https://m-recallsdev.cpsc.gov/api',
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''
