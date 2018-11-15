@@ -137,8 +137,6 @@ export default {
       });
       vm.latestLoaded = true;
       vm.resultCount = vm.recalls.length;
-      //vm.getChildrenRecalls();
-      //vm.latestChildrenLoaded = true;
     }
   }
 };
