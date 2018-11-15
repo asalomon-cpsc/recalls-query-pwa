@@ -90,7 +90,7 @@ export default {
       beforeinstallpromptfired: false,
       deferredPrompt: null,
       sheet: false,
-      drawer: true,
+      drawer: false,
       snackbar: false,
       y: "top",
       x: null,
@@ -126,6 +126,9 @@ export default {
     EventBus.$on("searchNavButtonClicked", val => {
       vm.drawer = true;
     });
+    EventBus.$on("searchResultFetched", val => {
+      vm.drawer = false;
+    });
     window.addEventListener("beforeinstallprompt", e => {
       // Prevent Chrome 67 and earlier from automatically showing the
       console.log('beforeinstallprompt event fired')
@@ -153,7 +156,6 @@ export default {
           })
           .catch(error => {
             //DO handle error
-            console.log(error)
           });
       });
     });
