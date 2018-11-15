@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-navigation-drawer v-model="drawer" stateless touchless fixed light :clipped="$vuetify.breakpoint.lgAndUp"
+    <v-navigation-drawer v-model="drawer" disable-resize-watcher disable-route-watcher touchless fixed light :clipped="$vuetify.breakpoint.lgAndUp"
       app width="310">
       <search></search>
 
@@ -127,6 +127,9 @@ export default {
       vm.drawer = true;
     });
     EventBus.$on("searchResultFetched", val => {
+      vm.drawer = false;
+    });
+     EventBus.$on("homePageLoaded", val => {
       vm.drawer = false;
     });
     window.addEventListener("beforeinstallprompt", e => {

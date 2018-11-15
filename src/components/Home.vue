@@ -95,6 +95,7 @@ export default {
   mounted: function() {
     let vm = this;
     vm.getRecalls();
+     EventBus.$emit("homePageLoaded", true);
   },
   methods: {
   
@@ -137,6 +138,7 @@ export default {
       });
       vm.latestLoaded = true;
       vm.resultCount = vm.recalls.length;
+
     }
   }
 };
