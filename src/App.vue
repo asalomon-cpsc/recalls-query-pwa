@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-navigation-drawer v-model="drawer" disable-resize-watcher disable-route-watcher fixed light :clipped="$vuetify.breakpoint.lgAndUp"
+    <v-navigation-drawer v-model="drawer" stateless touchless fixed light :clipped="$vuetify.breakpoint.lgAndUp"
       app width="310">
       <search></search>
 
@@ -131,7 +131,6 @@ export default {
     });
     window.addEventListener("beforeinstallprompt", e => {
       // Prevent Chrome 67 and earlier from automatically showing the
-      console.log('beforeinstallprompt event fired')
       e.preventDefault();
 
       // Stash the event so it can be triggered later.
