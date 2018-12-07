@@ -7,7 +7,7 @@
        <div id="search">
         <v-form   ref="form"  >
     <v-text-field
-      append-icon="search"
+      append-icon="title"
       color="green darken-2"
       label="Search For"
       v-model="searchFor"
