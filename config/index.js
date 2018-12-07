@@ -31,11 +31,11 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       // proxy all requests starting with /api to target
-      '/api': {
-        target: 'https://m-recallsdev.cpsc.gov/api',
+      '/recall': {
+        target: 'http://localhost/recallMicroservice_Windows/recall',
         changeOrigin: true,
         pathRewrite: {
-          '^/api': ''
+          '^/recall': ''
         
       },
      
