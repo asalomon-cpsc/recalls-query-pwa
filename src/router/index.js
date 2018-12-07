@@ -24,5 +24,5 @@ export default new Router({
       component:error
     }
   ],
-  mode:'history'
+  //mode:'history'
 })

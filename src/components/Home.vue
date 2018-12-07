@@ -31,12 +31,7 @@
                               <div  class="text-truncate"><strong>Product: </strong>
                               <br>
                               <span>{{r.productName}}</span></div>
-                              <div class="text-truncate"><strong>Manufacturer:</strong> 
-                                  <br>
-                              <span>{{r.manufacturer}}
-
-                                </span>
-                              </div>
+                             
                               
                             </div>
                           </v-card-text>
@@ -100,6 +95,7 @@ export default {
   mounted: function() {
     let vm = this;
     vm.getRecalls();
+     EventBus.$emit("homePageLoaded", true);
   },
   methods: {
   
@@ -134,10 +130,6 @@ export default {
           url: element.url,
           recallDate: moment(element.recallDate).format("MMM Do YYYY"),
           productName: element.products[0].name,
-          manufacturer:
-            element.manufacturers.length > 0
-              ? element.manufacturers[0].name
-              : "N/A",
           images: element.images, //use array functions to filter
           description: element.description
         };
@@ -146,8 +138,7 @@ export default {
       });
       vm.latestLoaded = true;
       vm.resultCount = vm.recalls.length;
-      //vm.getChildrenRecalls();
-      //vm.latestChildrenLoaded = true;
+
     }
   }
 };

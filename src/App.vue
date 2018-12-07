@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-navigation-drawer v-model="drawer" disable-resize-watcher disable-route-watcher fixed light :clipped="$vuetify.breakpoint.lgAndUp"
+    <v-navigation-drawer v-model="drawer" disable-resize-watcher disable-route-watcher touchless fixed light :clipped="$vuetify.breakpoint.lgAndUp"
       app width="310">
       <search></search>
 
@@ -90,7 +90,7 @@ export default {
       beforeinstallpromptfired: false,
       deferredPrompt: null,
       sheet: false,
-      drawer: true,
+      drawer: false,
       snackbar: false,
       y: "top",
       x: null,
@@ -126,9 +126,14 @@ export default {
     EventBus.$on("searchNavButtonClicked", val => {
       vm.drawer = true;
     });
+    EventBus.$on("searchResultFetched", val => {
+      vm.drawer = false;
+    });
+     EventBus.$on("homePageLoaded", val => {
+      vm.drawer = false;
+    });
     window.addEventListener("beforeinstallprompt", e => {
       // Prevent Chrome 67 and earlier from automatically showing the
-      console.log('beforeinstallprompt event fired')
       e.preventDefault();
 
       // Stash the event so it can be triggered later.
@@ -153,7 +158,6 @@ export default {
           })
           .catch(error => {
             //DO handle error
-            console.log(error)
           });
       });
     });
