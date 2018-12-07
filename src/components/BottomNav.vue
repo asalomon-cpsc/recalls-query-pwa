@@ -1,13 +1,13 @@
 <template>
   <v-card tile height="50px" flat>
-    <v-bottom-nav class="bottomNavControls " active.sync="recent" :value="true" fixed color="blue-grey darken-4">
-       <v-btn color="white" flat @click.stop="showSearchComponents()">
+    <v-bottom-nav class="headline text-xs-center pa-1" :active.sync="bottomNav" :value="true" fixed color="blue-grey darken-4">
+       <v-btn color="white" flat @click.stop="showSearchComponents()" :value="tiles[0].title">
         <v-icon>search</v-icon>
       </v-btn>
-      <v-btn color="white" flat :value="tiles[0].Title" to="/">
+      <v-btn color="white" flat :value="tiles[2].title" to="/" >
         <v-icon>home</v-icon>
       </v-btn>
-      <v-btn color="white" flat  href="https://www.cpsc.gov">
+      <v-btn color="white" flat  href="https://www.cpsc.gov" :value="tiles[1].title">
         <v-icon>public</v-icon>
       </v-btn>
       
@@ -25,6 +25,7 @@
 
     data: function () {
       return {
+        bottomNav:'Home',
         drawer: null,
         selector: "#content",
         duration: 300,
@@ -35,8 +36,12 @@
             title: "Search"
           },
           {
-            icon: "share",
-            title: "Share"
+            icon: "public",
+            title: "Public"
+          },
+          {
+            icon: "home",
+            title: "Home"
           }
         ]
       };
