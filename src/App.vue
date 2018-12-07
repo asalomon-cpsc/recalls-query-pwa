@@ -8,7 +8,7 @@
     <v-toolbar color="indigo darken-1" dark dense app fixed id="toolbar">
       <v-toolbar-title v-text="title" color="white">
       </v-toolbar-title>
-      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+      
 
       <div class="d-flex align-center " style="margin-left: auto">
         <v-bottom-sheet v-if="!beforeinstallpromptfired" v-model="sheet" v-touch="{
@@ -127,7 +127,9 @@ export default {
       vm.drawer = true;
     });
     EventBus.$on("searchResultFetched", val => {
+      if(val.resultCount>0){
       vm.drawer = false;
+      }
     });
      EventBus.$on("homePageLoaded", val => {
       vm.drawer = false;
