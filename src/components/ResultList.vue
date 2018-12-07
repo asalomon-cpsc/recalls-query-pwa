@@ -23,11 +23,11 @@
                     <v-list-tile-title v-text="item.recallDate" >
                     
                     </v-list-tile-title >
-                    <a v-bind:href="item.url" target="_blank">
+                    
                     <v-list-tile-sub-title >
                      <span class='grey--text text--darken-2'>{{item.title}}</span> 
                     </v-list-tile-sub-title>
-                    </a>
+                  
                      
                 </v-list-tile-content>
                 
