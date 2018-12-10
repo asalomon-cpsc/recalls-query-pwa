@@ -17,7 +17,7 @@ IF "%build%"=="staging" (
 
 IF  "%build%"=="development" (
     echo development
-    SET server1="rmspreprodiweb1"
+    SET server1="rmspreprodweb1"
     SET server2="rmspreprodweb2"
 )
 
