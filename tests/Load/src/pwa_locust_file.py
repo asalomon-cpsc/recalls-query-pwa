@@ -28,6 +28,7 @@ json_data2 = """
 """
 request_headers = {'content-type': 'application/json'}
 
+# this class will trigger a load test
 
 class PwaApp(TaskSet):
     @task
