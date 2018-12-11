@@ -28,7 +28,7 @@
     v-show="hasResult"
     :disabled="formState.cleared && !manufacturers.length>0"
      append-icon="business"
-      label="Manufacture"
+      label="Manufacturer"
       v-model="manufacturer"
       :items="manufacturers"
       clearable
