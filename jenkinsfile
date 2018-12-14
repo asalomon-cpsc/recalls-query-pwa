@@ -15,6 +15,7 @@ pipeline {
             steps {
                echo 'packaging and deploying for development'
                bat 'npm run build'
+               bat 'npm run docs:build'
                bat 'deploy.cmd development'
 
             }
@@ -26,6 +27,7 @@ pipeline {
             steps {
                echo 'packaging and deploying for production'
                bat 'npm run build'
+               bat 'npm run docs:build'
                bat 'deploy.cmd production'
                
             }
