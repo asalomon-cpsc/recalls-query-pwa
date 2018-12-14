@@ -1,12 +1,13 @@
 <template>
-  <v-container>
+  <v-container >
     <v-layout align-center>
-      <v-flex xs12 sm12 md12 lg12 xl12 id="resultList">
+      <v-flex  xs12 sm12 md12 lg12 xl12 id="resultList">
 
         <v-list three-line>
 
           <v-subheader>Recalls ({{recalls?recalls.length:0}})</v-subheader>
-          <template v-for="(item,index) in recalls">
+           <no-records v-if="recalls.length===0"></no-records>
+          <template v-if="recalls.length> 0" v-for="(item,index) in recalls">
             <v-card active-class="warning" hover raised v-bind:key="item.recallNumber" class="mb-1">
               <v-list-tile v-bind:size="thumbSize" ripple v-bind:key="index">
                 <a v-bind:href="avatarUrl(item)" target="_blank">
@@ -40,46 +41,66 @@
                       <p>{{item.description}}</p>
                       <h4>Recall Number</h4>
                       <p>{{item.recallNumber}}</p>
+                       <h4>Consumer Contact</h4>
+                      <p>{{item.consumerContact}}</p>
                       <h4>Products</h4>
-
-                      <div v-for="p in item.products" :key="p.name">
-                        <br />
-                        <span><strong>Name: </strong> {{p.name}}</span><br />
+                      <ul>
+                        <li v-for="p in item.products" :key="p.name">
+                             <span><strong>Name: </strong> {{p.name}}</span><br />
                         <span><strong>Type: </strong> {{p.type}}</span><br />
-                        <span><strong>No Of Units: </strong> {{p.numberOfUnits}}</span><br />
-                      </div><br />
+                        <span><strong>Units Sold: </strong> {{p.numberOfUnits}}</span>
+                        </li>
+                      </ul>
+                      <br>
+                      
 
                       <h4>Injuries</h4>
                       <span v-for="i in item.injuries" :key="i.name">
                         <p>{{i.name}}</p>
                       </span><br />
+                     
                       <h4>Manufacturers</h4>
-
-                      <span v-for="m in item.manufacturers" :key="m.name">
-                        <p>{{m.name}}</p>
-
-                      </span><br />
+                      <ul>  
+                       <li v-for="m in item.manufacturers" :key="m.name">
+                           {{m.name}}
+                       </li>
+                      </ul>
+                     <br />
                       <h4>Manufacturer Countries</h4>
-                      <span v-for="mc in item.manufacturerCountries" :key="mc.country">
-                        <p>{{mc.country}}</p>
-                      </span><br />
+                      <ul>  
+                        <li v-for="mc in item.manufacturerCountries" :key="mc.country">
+                             {{mc.country}}
+                        </li>
+                      </ul>
+                      <br>
                       <h4>ProductUpcs</h4>
-                      <span v-for="upc in item.productUpcs" :key="upc.upc">
-                        {{upc.upc}}
-                      </span><br />
+                      <ul>
+                        <li v-for="upc in item.productUpcs" :key="upc.upc">
+                            {{upc.upc}}
+                        </li>
+                      </ul>
+                     <br>
                       <h4>Hazards</h4>
-                      <span v-for="haz in item.hazards" :key="haz.name">
-                        <p>{{haz.name}}</p>
-                      </span>
+                      <ul>
+                        <li v-for="haz in item.hazards" :key="haz.name">
+                            {{haz.name}}
+                        </li>
+                      </ul>
+                      <br>
                       <h4>Remedies</h4>
-                      <span v-for="r in item.remedies" :key="r.name">
-                        <p>{{r.name}}</p>
-                      </span><br />
+                      <ul>
+                        <li v-for="r in item.remedies" :key="r.name">
+                            {{r.name}}
+                        </li>
+                      </ul>
+                     <br>
                       <h4>Retailers</h4>
-
-                      <span v-for="ret in item.retailers" :key="">
-                        <p>{{ret.name}}</p>
-                      </span><br />
+                      <ul>
+                        <li v-for="ret in item.retailers" :key="ret.name">
+                           {{ret.name}}
+                        </li>
+                      </ul>
+                     
 
                     </v-card-text>
                   </v-card>
@@ -99,9 +120,12 @@
   import {
     EventBus
   } from "../eventBus.js";
+  import noRecords from "./NoRecords.vue"
   export default {
     name: "resultList",
-
+    components: {
+    noRecords
+  },
     methods: {
       avatarUrl: function (item) {
         var avatar = this.altImage;
