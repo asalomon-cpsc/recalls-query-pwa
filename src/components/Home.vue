@@ -4,7 +4,17 @@
     <v-layout row wrap>
       <v-flex>
         <h4 class="grey--text">Latest Recalls</h4>
-        <v-progress-linear v-if="!latestLoaded" :indeterminate="true"></v-progress-linear>
+        <v-layout >
+     
+
+      <v-flex xs12 sm12 class="centered" v-show="!latestLoaded" >
+       <v-progress-circular color="orange lighten-2" :width="6" :size="175" :indeterminate="true">
+            <img contain with="100" height="100" src="https://www.cpsc.gov/sites/all/themes/cpsc/images/logo.png" alt="cpsc">
+
+        </v-progress-circular>
+      </v-flex>
+    </v-layout>
+        
         <div v-show="latestLoaded" class="section">
           <ul id="featured" class="d-flex">
             <li v-for="(r,index) in latestRecalls" v-bind:key="index">
@@ -113,7 +123,9 @@ export default {
           }
         })
         .catch(error => {
-          vm.handleError("apiCallErrorOccured", error);
+          
+          vm.handleError("apiCallErrorOccured", error)
+          
         });
     },
     handleError(type, error) {
@@ -199,5 +211,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* overflow-x: hidden; */
+}
+
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
 }
 </style>
