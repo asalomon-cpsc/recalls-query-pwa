@@ -23,19 +23,19 @@
       v-model="productName"
       @keyup.enter.tab="submit()"
     ></v-text-field>
-    
+   
+
     <v-select
-    v-show="hasResult"
+     v-show="hasResult"
     :disabled="formState.cleared && !manufacturers.length>0"
      append-icon="business"
-      label="Manufacturer"
+      label="Company"
       v-model="manufacturer"
       :items="manufacturers"
       clearable
-      
     ></v-select>
-    <v-select
     
+    <v-select
     v-show="hasResult"
     :disabled="formState.cleared && !productTypes.length>0"
     appenda-icon="battery_unknown"
@@ -131,9 +131,7 @@ import moment from "moment";
 import {  EventBus } from "../eventBus.js";
 export default {
   name: "search",
-  components: {
-    
-  },
+  
   data: function() {
     return {
       showProgress: false,
@@ -142,7 +140,6 @@ export default {
         cleared: true,
         completed: false
       },
-
       loader: null,
       searchFor: "",
       productName: "",
@@ -248,16 +245,12 @@ export default {
             withcredentials: false
           })
           .then(response => {
-            
-            if (response.data.resultCount > 0) {
-             
-              vm.handleResponse(response);
+             vm.handleResponse(response);
               EventBus.$emit("searchResultFetched", {
                 resultCount: vm.resultCount,
                 recalls: vm.recalls
-              });
-              
-            } else {
+             });
+            if (response.data.resultCount === 0) {
               vm.showProgress = false;
               vm.formState.started = false;
               vm.formState.completed = true;
@@ -305,6 +298,7 @@ export default {
         });
         vm.recalls.push({
           title: element.title,
+          consumerContact: element.consumerContact,
           recallNumber:vm.formatRecallNumber(element.recallNumber),
           url: element.url,
           recallDate: moment(element.recallDate).format("MMM Do YYYY"),
