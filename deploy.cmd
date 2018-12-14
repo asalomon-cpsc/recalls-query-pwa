@@ -31,15 +31,32 @@ SET SOURCE_LOC=".\dist"
 SET DEPLOY_LOC1="\\\\%server1%\\c$\\inetpub\\wwwroot\\recalls-pwa-api-win\\dist"
 SET DEPLOY_LOC2="\\\\%server2%\\c$\\inetpub\\wwwroot\\recalls-pwa-api-win\\dist"
 
+
 echo ---------------------------------------
-echo Copying to %server1%
+echo Copying PWA App to %server1%
 echo ---------------------------------------
 CALL ROBOCOPY  %SOURCE_LOC% %DEPLOY_LOC1% /e /mir /purge
 
 echo ---------------------------------------
-echo Copying to %server2% 
+echo Copying PWA App to %server2% 
 echo ---------------------------------------
 CALL ROBOCOPY %SOURCE_LOC% %DEPLOY_LOC2% /e /mir /purge
+
+
+SET DOC_SOURCE_LOC=".\docs\.vuepress\dist"
+SET DOC_DEPLOY_LOC1="\\\\%server1%\\c$\\inetpub\\wwwroot\\recalls-pwa-api-win\\docs"
+SET DOC_DEPLOY_LOC2="\\\\%server2%\\c$\\inetpub\\wwwroot\\recalls-pwa-api-win\\docs"
+
+
+echo ---------------------------------------
+echo Copying PWA App Docs to %server1%
+echo ---------------------------------------
+CALL ROBOCOPY  %DOC_SOURCE_LOC% %DEPLOY_LOC1% /e /mir /purge
+
+echo ---------------------------------------
+echo Copying PWA App Docs to %server2% 
+echo ---------------------------------------
+CALL ROBOCOPY %DOC_SOURCE_LOC% %DEPLOY_LOC2% /e /mir /purge
 :usage
 echo Error: Incorrect Usage.
 @Echo Correct Usage: %0 [Staging/development/production]
