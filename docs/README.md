@@ -4,15 +4,15 @@
 
 ## Installation
  
-### IOS Devices (Iphone, Ipad etc) 
+### IOS Devices (Iphone, Ipad) 
 <img src="./assets/ios/icons8-ios-logo-50.png" alt="ios" >
 
 
 
-1.	Navigate to https://m-recalls.cpsc.gov using Safari from your IPhone
+1.	Navigate to [https://m-recalls.cpsc.gov](https://m-recalls.cpsc.gov) using *Safari* from your IOS device.
 
 
-2.	Click on “Share” icon present at the bottom of the Safari browser
+2.	Click on “Share” icon present at the bottom of the *Safari* browser
 
     <img src="./assets/ios/iphone_step1.png" alt="ios step 1" > 
 
@@ -35,7 +35,7 @@
 ### Android Devices 
 <img src="./assets/Android/icons8-android-os-48.png" alt="Android Icon" > 
 
-1. Navigate to https://m-recalls.cpsc.gov from your Android device.
+1. Navigate to [https://m-recalls.cpsc.gov](https://m-recalls.cpsc.gov) from your Android device.
 
 2. You should automatically be prompted to install the app.
    
@@ -43,11 +43,11 @@
 
     <img src="./assets/Android/Android_Step1.jpg" alt="Android" > 
 
-4. Look for the CPSCRecalls Icon on your device’s home screen then click on it.
+4. Look for the *CPSCRecalls* Icon on your device’s home screen then click on it.
 
     <img src="./assets/Android/Android_Step2.jpg" alt="Android2" > 
 
-5. The app opens initially opens with the latest 15 recalls displayed.
+5. The app opens initially with the latest 15 recalls displayed.
 
 ## Home Page
 
@@ -59,13 +59,13 @@ You can click on the dropdown arrow to view the recall description
 
 ## Navigation
 
-1.	Navigate back and forth between the search result and the latest recalls (Home/Landing page) with the bottom navigation bar.
+1. Navigate back and forth between the search result and the latest recalls (Home/Landing page) with the bottom navigation bar.
         
      <img src="./assets/navigation.png" alt="latest recalls">
 
-2.	Click on the Home icon (<img src="./assets/home.png" alt="latest recalls" >  )to go to the landing page.
+2. Click on the Home icon (<img src="./assets/home.png" alt="latest recalls" >  )to go to the landing page.
 
-3.	Click on the Search icon (<img src="./assets/search.png" alt="latest recalls" > )  to go back to the search results page.
+3. Click on the Search icon (<img src="./assets/search.png" alt="latest recalls" > )  to go back to the search results page.
 
 
 ## Search For Recalls
@@ -74,7 +74,7 @@ You can click on the dropdown arrow to view the recall description
 
     <img src="./assets/search_init.png" alt="latest recalls" > 
 
-2. Any piece of text can be entered in the “Search For” field, a product type, a manufacturer/retailer/importer name, a product name ,a recall title or description.
+2. Any piece of text can be entered in the “Search For” field: a product type, a manufacturer/retailer/importer name, a product name ,a recall title or description.
 (In the example below, a Product Model was entered in the Product Model field)
 
 3. Then click on the “apply” button ( <img src="./assets/apply.png" alt="latest recalls" > ) and if any records are found, the number of records will be displayed.
@@ -85,17 +85,16 @@ You can click on the dropdown arrow to view the recall description
 
 5. To clear the search form, click on the reset button (<img src="./assets/reset_button.png" alt="reset" > )
 
-::: tip
-The initial fields available for search are
-Search For, Product Name, Product Model and the relative date range up to a year from now.
-:::
 
 :::  warning NOTE
-The Manufacture and the Product Type fields are only available as a dropdown to help narrow down search results
+The initial fields available for search are
+Search For, Product Name, Product Model and the relative date range up to a year from now.
+
+The Company and the Product Type fields are only available as additional filters  to help narrow down the text search results
 :::
 
 
-## Search Results
+## Search Results Overview
 
 1. To View Details of a recall while scrolling through the search results, expand the recall card by  clicking on the down arrow or by clicking on the view details button
 
