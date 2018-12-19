@@ -23,8 +23,8 @@
                   <v-layout >
                     <v-flex>
                       <v-card color="grey lighten-4" class="dark--text"  ripple>
-                            <v-card-media contain :src="r.images[0].url" class="black--text" height="240" aspect-ratio="1">
-                            </v-card-media>
+                            <v-img contain :src="r.images[0].url" class="black--text" height="240" aspect-ratio="1">
+                            </v-img>
                         <v-divider light></v-divider>
                        
                           <v-card-text >
