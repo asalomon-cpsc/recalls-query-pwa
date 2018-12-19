@@ -29,6 +29,7 @@
 
 
         </v-bottom-sheet>
+
         <v-btn small round color="orange darken-4" v-if="beforeinstallpromptfired" @click="showInstallPrompt($event)">
           <v-icon>add</v-icon>
           install
@@ -38,7 +39,9 @@
             <img src="https://www.cpsc.gov/sites/all/themes/cpsc/images/logo.png" alt="cpsc">
           </v-avatar>
         </v-btn>
+
       </div>
+      
     </v-toolbar>
 
     <v-content id="content">
@@ -54,11 +57,11 @@
         Close
       </v-btn>
     </v-snackbar>
-
+    
 
     <bottom-nav v-if="showOnSmAndDown"></bottom-nav>
     <mfooter v-if="showOnMdAndUp"></mfooter>
-
+    <install-prompt v-if="showInstallDialog"></install-prompt>
   </v-app>
 </template>
 <script>
@@ -66,6 +69,7 @@ import bottomNav from "./components/BottomNav.vue";
 import mfooter from "./components/mFooter.vue";
 import footerInfo from "./components/FooterInfo.vue";
 import search from "./components/Search.vue";
+import installPrompt from "./components/InstallPrompt.vue"
 import axios from "axios";
 import moment from "moment";
 import {
@@ -76,7 +80,8 @@ export default {
     mfooter,
     bottomNav,
     footerInfo,
-    search
+    search,
+    installPrompt
   },
   name: "App",
   data() {
@@ -118,9 +123,12 @@ export default {
     },
     showOnSmAndDown() {
       return this.$vuetify.breakpoint.smAndDown;
+    },
+    showInstallDialog(){
+      return this.isIosMobileDevice() && !this.isAppAlreadyInstalled()
     }
   },
-
+  
   mounted() {
     const vm = this;
     EventBus.$on("searchNavButtonClicked", val => {
@@ -159,13 +167,18 @@ export default {
             withCredentials: false
           })
           .catch(error => {
-            //DO handle error
+            
           });
       });
     });
   },
   methods: {
-   
+    isIosMobileDevice(){
+       return ['iPhone','iPad','iPod'].includes(navigator.platform);
+    },
+    isAppAlreadyInstalled(){
+         return navigator.standalone
+    },
     showInstallPrompt(e) {
       const vm = this;
 
