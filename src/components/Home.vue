@@ -117,7 +117,6 @@ export default {
       let requestParams = axios
         .get(apiRecallURL)
         .then(response => {
-          console.log(response)
           if (response.data.resultCount > 0) {
             vm.handleResponse(response);
           }
