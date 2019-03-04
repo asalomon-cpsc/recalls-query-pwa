@@ -102,7 +102,8 @@ export default {
       mode: "",
       timeout: 6000,
       text: "Installed Succesfully! The app is now available on your home screen",
-      browsers : ["MSIE", "Firefox", "Safari", "Chrome", "Opera","CriOS"]
+      browsers : ["MSIE", "Firefox", "Safari", "Chrome", "Opera","CriOS"],
+      installStatus:"unknown"
     };
   },
   computed: {
@@ -166,7 +167,7 @@ export default {
               OS: "unknown",
               Device: vm.getDevicePlatform(),
               Date: moment().format("MMM Do YYYY"),
-              InstallStatus: "Success"
+              InstallStatus: vm.installStatus
             },
             withCredentials: false
           })
@@ -200,12 +201,14 @@ export default {
     },
     showInstallPrompt(e) {
       const vm = this;
-
       vm.beforeinstallpromptfired = false;
       vm.deferredPrompt.prompt();
       vm.deferredPrompt.userChoice.then(choiceResult => {
-        if (choiceResult.outcome === "accepted") {} else {
+        if (choiceResult.outcome === "accepted") {
+          vm.installStatus = "success"
+        } else {
           //TODO: what action to take if user dismissed prompt?
+          vm.installStatus = "rejected"
         }
         vm.deferredPrompt = null;
       });
