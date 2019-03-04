@@ -101,7 +101,8 @@ export default {
       x: null,
       mode: "",
       timeout: 6000,
-      text: "Installed Succesfully! The app is now available on your home screen"
+      text: "Installed Succesfully! The app is now available on your home screen",
+      browsers : ["MSIE", "Firefox", "Safari", "Chrome", "Opera","CriOS"]
     };
   },
   computed: {
@@ -125,7 +126,7 @@ export default {
       return this.$vuetify.breakpoint.smAndDown;
     },
     showInstallDialog(){
-      return this.isIosMobileDevice() && !this.isAppAlreadyInstalled()
+      return !this.isChromeForIosBrowser() && this.isIosMobileDevice() && !this.isAppAlreadyInstalled() 
     }
   },
   
@@ -142,6 +143,9 @@ export default {
      EventBus.$on("homePageLoaded", val => {
       vm.drawer = false;
     });
+    console.log('device browser: ' + vm.getBrowserId(vm.browsers))
+    console.log('device platform: ' + vm.getDevicePlatform())
+     
     window.addEventListener("beforeinstallprompt", e => {
       // Prevent Chrome 67 and earlier from automatically showing the
       e.preventDefault();
@@ -158,9 +162,9 @@ export default {
         axios
           .post(apiInstallInfoURL, {
             data: {
-              Browser: "N/A",
+              Browser: vm.getBrowserId(vm.browsers),
               OS: "unknown",
-              Device: "N/A",
+              Device: vm.getDevicePlatform(),
               Date: moment().format("MMM Do YYYY"),
               InstallStatus: "Success"
             },
@@ -174,7 +178,22 @@ export default {
   },
   methods: {
     isIosMobileDevice(){
+       let that = this;
        return ['iPhone','iPad','iPod'].includes(navigator.platform);
+    },
+    isChromeForIosBrowser(){
+      let that = this;
+      let browsers = that.browsers
+      return that.getBrowserId(browsers)===browsers[5]
+    },
+    getDevicePlatform(){
+      return navigator.platform
+    },
+    getBrowserId(browsers){
+      let sUsrAg = window.navigator.userAgent,
+      upperBound = browsers.length - 1;
+      for (upperBound; upperBound > -1 && sUsrAg.indexOf(browsers[upperBound]) === -1; upperBound--);
+      return browsers[upperBound];
     },
     isAppAlreadyInstalled(){
          return navigator.standalone
