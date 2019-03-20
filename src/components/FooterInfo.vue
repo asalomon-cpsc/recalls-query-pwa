@@ -17,10 +17,10 @@
         </v-btn>
            <div>
             <span >Contact Us: 800-638-2772 (TTY 800-638-8270) Toll Free Consumer Hotline | Time: 8 a.m. - 5.30. p.m. ET</span><br>
-            <span><a href="mailto:suggestions@cpsc.gov" >Website Feedback</a></span><br>
-             This is an official website of the United States government.
+            <span><a href="mailto:suggestions@cpsc.gov" >App Feedback</a></span><br>
+             This is an official app of the United States government.
             </div>
-            <div>Version: 1.0.0</div>
+            <div>Version: {{appVersion}}</div>
             <div class="text-xs-center">
     <v-menu offset-y>
       <v-btn slot="activator" top dark flat value="help">
@@ -53,7 +53,8 @@ export default {
         { title: 'Search Overview',url:'/docs/#search-results-overview' },
         { title: 'Installation',url:'/docs/#installation' },
         
-      ]
+      ],
+      appVersion:"1.0.1"
     }),
     methods:{
      redirectToGuide (item){
