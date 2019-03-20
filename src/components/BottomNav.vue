@@ -1,16 +1,24 @@
 <template>
-  <v-card tile height="50px" flat>
-    <v-bottom-nav class="headline text-xs-center pa-1" :active.sync="bottomNav" :value="true" fixed color="blue-grey darken-4">
-       <v-btn color="white" flat @click.stop="showSearchComponents()" :value="tiles[0].title">
-        <v-icon>search</v-icon>
+  <v-card class="hide-overflow" height="50px" >
+    <v-bottom-nav  
+     :active.sync="bottomNav" 
+     :value="true" 
+     fixed
+     dark
+     color="grey lighten-4"
+     >
+       <v-btn dark color="black" flat @click.stop="showSearchComponents()" >
+        <span>{{tiles[0].title}}</span>
+        <v-icon color="black" >search</v-icon>
       </v-btn>
-      <v-btn color="white" flat :value="tiles[2].title" to="/" >
-        <v-icon>home</v-icon>
+      <v-btn dark color="black" flat  to="/" >
+        <span>{{tiles[1].title}}</span>
+        <v-icon color="black" >home</v-icon>
       </v-btn>
-      <v-btn color="white" flat  href="https://www.cpsc.gov" :value="tiles[1].title">
-        <v-icon>public</v-icon>
+      <v-btn dark color="black" flat :value="help.title"  @click="redirectToGuide()">
+        <span>{{help.title}}</span>
+            <v-icon color="black" >help</v-icon>
       </v-btn>
-      
     </v-bottom-nav>
   </v-card>
 </template>
@@ -25,6 +33,7 @@
 
     data: function () {
       return {
+        help: { title: 'Help Guide',url:'/docs'},
         bottomNav:'Home',
         drawer: null,
         selector: "#content",
@@ -35,10 +44,7 @@
             icon: "search",
             title: "Search"
           },
-          {
-            icon: "public",
-            title: "Public"
-          },
+         
           {
             icon: "home",
             title: "Home"
@@ -66,7 +72,12 @@
      //show resultlist route because users may want to navigate back to resultlist from home
       showSearchComponents(){
         EventBus.$emit("searchNavButtonClicked", true)
-        this.$router.push("resultList")
+        //this.$router.push("resultList")
+      },
+       redirectToGuide (){
+       
+       window.location = this.help.url
+
       }
     }
   };

@@ -22,20 +22,7 @@
             </div>
             <div>Version: {{appVersion}}</div>
             <div class="text-xs-center">
-    <v-menu offset-y>
-      <v-btn slot="activator" top dark flat value="help">
-            <v-icon  dark color="orange lighten-2">help</v-icon>
-          </v-btn>
-      <v-list>
-        <v-list-tile
-          v-for="(item, index) in items"
-          :key="index"
-          @click="redirectToGuide(item)"
-        >
-          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-menu>
+    
   </div>
           </div>
 
@@ -48,20 +35,11 @@
 export default {
   name:"footerInfo",
   data: () => ({
-      items: [
-        { title: 'Help Guide',url:'/docs'},
-        { title: 'Search Overview',url:'/docs/#search-results-overview' },
-        { title: 'Installation',url:'/docs/#installation' },
-        
-      ],
+      
       appVersion:"1.0.1"
     }),
     methods:{
-     redirectToGuide (item){
-       console.log(item)
-      window.location = item.url
-
-      }
+    
     }
 }
 </script>
