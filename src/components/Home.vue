@@ -5,59 +5,160 @@
       <v-flex>
         <h4 class="grey--text">Latest Recalls</h4>
         <v-layout >
-     
-
       <v-flex xs12 sm12 class="centered" v-show="!latestLoaded" >
        <v-progress-circular color="orange lighten-2" :width="6" :size="175" :indeterminate="true">
             <img contain with="100" height="100" src="https://www.cpsc.gov/sites/all/themes/cpsc/images/logo.png" alt="cpsc">
-
         </v-progress-circular>
       </v-flex>
-    </v-layout>
-        
+    </v-layout> 
         <div v-show="latestLoaded" class="section">
           <ul id="featured" class="d-flex">
-            <li v-for="(r,index) in latestRecalls" v-bind:key="index">
+            <li v-for="(item,index) in latestRecalls" v-bind:key="index">
               <v-card flat>
                 <v-container fluid grid-list-lg>
                   <v-layout >
                     <v-flex>
                       <v-card color="grey lighten-4" class="dark--text"  ripple>
-                            <v-img contain :src="r.images[0].url" class="black--text" height="240" aspect-ratio="1">
+                            <v-img contain :src="item.images[0].url" class="black--text" height="240" aspect-ratio="1">
                             </v-img>
-                        <v-divider light></v-divider>
-                       
+                        <v-divider light></v-divider>                       
                           <v-card-text >
                             <div>
                               <div class="text-truncate"><strong>Title:</strong>
                                   <br>
-                              <span>{{r.title}}</span>
-                           
+                              <span>{{item.title}}</span>                          
                                </div>
                               <div class="text-truncate"><strong>Recall Date:</strong>
                                   <br>
-                               <span>{{r.recallDate}}</span>
+                               <span>{{item.recallDate}}</span>
                               </div>
-                              <div  class="text-truncate"><strong>Product: </strong>
+                              <div  class="text-truncate"><strong>Products: </strong>
                               <br>
-                              <span>{{r.productName}}</span></div>
-                             
-                              
+                              <span>{{item.products[0].name}}</span></div>                             
                             </div>
-                          </v-card-text>
-                          
-                        
+                          </v-card-text>                       
                         <v-card-actions>
                         <v-spacer></v-spacer>
                         <v-btn large  round raised ripple outline color="orange"  icon @click="showDetails =!showDetails">
                         <v-icon color="orange">{{ !showDetails? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
                         </v-btn>
                         </v-card-actions>
-                        <v-slide-y-transition>
+                        
                            <v-card-text v-show="showDetails">
-                             {{r.description}}
+                                <h4>Description</h4>
+                      <p>{{item.description}}</p>
+                       <br>
+                      
+                      <br>
+                      <h4>Recall Number</h4>
+                      <p>{{item.recallNumber}}</p>
+                       <br>
+                      
+                      <br>
+                      <h4>Consumer Contact</h4>
+                      <p>{{item.consumerContact}}</p>
+                       <br>
+                      
+                      <br>
+                      <h4>Products</h4>
+                      <ul>
+                        <li v-for="p in item.products" :key="p.name">
+                          <span>
+                            <strong>Name:</strong>
+                            {{p.name}}
+                          </span>
+                          <br>
+                          <span>
+                            <strong>Type:</strong>
+                            {{p.type}}
+                          </span>
+                          <br>
+                          <span>
+                            <strong>Units Sold:</strong>
+                            {{p.numberOfUnits}}
+                          </span>
+                        </li>
+                      </ul>
+                       <br>
+                     
+                      <br>
+                      <h4>Injuries</h4>
+                      <span v-for="i in item.injuries" :key="i.name">
+                        <p>{{i.name}}</p>
+                      </span>
+                      <br>
+                     
+                      <br>
+                      <h4>Manufacturers</h4>
+                      <ul>
+                        <li v-for="m in item.manufacturers" :key="m.name">{{m.name}}</li>
+                      </ul>
+                      <br>
+                      
+                      <br>
+                      <h4>Manufacturer Countries</h4>
+                      <ul>
+                        <li
+                          v-for="mc in item.manufacturerCountries"
+                          :key="mc.country"
+                        >{{mc.country}}</li>
+                      </ul>
+                      <br>
+                      
+                      <br>
+                      <h4>Hazards</h4>
+                      <ul>
+                        <li v-for="haz in item.hazards" :key="haz.name">{{haz.name}}</li>
+                      </ul>
+                      <br>
+                     
+                      <br>
+                      <h4>Remedies</h4>
+                      <ul>
+                        <li v-for="item in item.remedies" :key="item.name">{{item.name}}</li>
+                      </ul>
+                      <br>
+                      
+                      <br>
+                      <h4>Retailers</h4>
+                      <ul>
+                        <li v-for="ret in item.retailers" :key="ret.name">{{ret.name}}</li>
+                      </ul>
+                      <br>
+                      
+                      <br>
+                      <h4>Images</h4>
+                      <v-flex xs12 sm6 offset-sm3>
+                        <v-card>
+                          <v-container grid-list-sm fluid>
+                            <v-layout row wrap>
+                              <v-flex v-for="img in item.images" :key="img.url" xs4 d-flex>
+                                <v-card flat tile class="d-flex">
+                                  <v-img
+                                    :src="img.url"
+                                    aspect-ratio="1"
+                                    class="grey lighten-2"
+                                    contain
+                                  >
+                                    <v-layout
+                                      slot="placeholder"
+                                      fill-height
+                                      align-center
+                                      justify-center
+                                      ma-0
+                                    >
+                                      <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                                    </v-layout>
+                                  </v-img>
+                                </v-card>
+                              </v-flex>
+                            </v-layout>
+                          </v-container>
+                        </v-card>
+                      </v-flex>
                            </v-card-text>
-                        </v-slide-y-transition>
+                     
+                        
                       </v-card>
                     </v-flex>
                   </v-layout>
@@ -126,7 +227,7 @@ export default {
     },
     handleError(type, error) {
       EventBus.$emit(type, error);
-      this.$router.push("error");
+      this.$routeitem.push("error");
     },
 
     handleResponse(response) {
@@ -135,11 +236,20 @@ export default {
       response.data.recalls.forEach(element => {
         let rec = {
           title: element.title,
+          consumerContact: element.consumerContact,
+          recallNumber:element.recallNumber,
           url: element.url,
           recallDate: moment(element.recallDate).format("MMM Do YYYY"),
-          productName: element.products[0].name,
           images: element.images, //use array functions to filter
-          description: element.description
+          description: element.description,
+          products: element.products,
+          injuries: element.injuries,
+          manufacturers: element.manufacturers? element.manufacturers: [],
+          manufacturerCountries: element.manufacturerCountries,
+          productUpcs: element.productUPCs,
+          hazards: element.hazards,
+          remedies: element.remedies,
+          retailers: element.retailers
         };
 
         vm.latestRecalls.push(rec);
