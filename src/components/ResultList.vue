@@ -101,10 +101,10 @@
                                 <v-card flat tile class="d-flex">
                                   <v-img
                                     :src="img.url"
-                                    aspect-ratio="1"
+                                    :lazy-src="altImage"
                                     class="grey lighten-2"
                                     contain
-                                  >
+                                    >
                                     <v-layout
                                       slot="placeholder"
                                       fill-height
