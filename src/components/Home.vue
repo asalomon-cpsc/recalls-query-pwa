@@ -38,9 +38,12 @@
                             </div>
                           </v-card-text>                       
                         <v-card-actions>
+                        
+                        <v-btn large round raised ripple outline color="orange"  @click="showDetails =!showDetails">View Details
+                        </v-btn>
                         <v-spacer></v-spacer>
-                        <v-btn large  round raised ripple outline color="orange"  icon @click="showDetails =!showDetails">
-                        <v-icon color="orange">{{ !showDetails? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
+                        <v-btn large  round raised ripple outline  icon @click="showDetails =!showDetails">
+                        <v-icon >{{ !showDetails? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
                         </v-btn>
                         </v-card-actions>
                         
