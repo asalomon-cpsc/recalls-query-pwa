@@ -1,5 +1,5 @@
 module.exports = {
-  NODE_ENV: '"QA"',
+  NODE_ENV: '"qa"',
   DEBUG_MODE: false,
   ROOT_RECALLS_API: '"https://pwa1-appservice.azurewebsites.net/recall/"',
   ROOT_STATS_API: '"https://pwa1-appservice.azurewebsites.net/stats/"',
