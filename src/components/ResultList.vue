@@ -93,34 +93,8 @@
                       
                     </v-card-text>
                     <v-divider></v-divider>
-                      <v-flex xs12 sm6 offset-sm3>
-                        <v-card>
-                          <v-container grid-list-sm fluid>
-                            <v-layout row wrap>
-                              <v-flex v-for="img in item.images" :key="img.url" xs4 d-flex>
-                                <v-card flat tile class="d-flex">
-                                  <v-img
-                                    :src="img.url"
-                                    :lazy-src="altImage"
-                                    class="grey lighten-2"
-                                    contain
-                                    >
-                                    <v-layout
-                                      slot="placeholder"
-                                      fill-height
-                                      align-center
-                                      justify-center
-                                      ma-0
-                                    >
-                                      <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-                                    </v-layout>
-                                  </v-img>
-                                </v-card>
-                              </v-flex>
-                            </v-layout>
-                          </v-container>
-                        </v-card>
-                      </v-flex>
+                   
+                     
                   </v-card>
                 </v-expansion-panel-content>
               </v-expansion-panel>
@@ -185,6 +159,7 @@ export default {
         easing: this.easing
       };
     }
+
   },
   data: function() {
     return {
@@ -196,6 +171,7 @@ export default {
       thumbSize: "50",
       resultCount: 0,
       hasResult: false,
+      showDetails: false,
       altImage: "https://www.cpsc.gov/sites/all/themes/cpsc/images/logo.png"
     };
   }

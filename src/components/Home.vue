@@ -15,7 +15,7 @@
           <ul id="featured" class="d-flex">
             <li v-for="(item,index) in latestRecalls" v-bind:key="index">
               <v-card flat>
-                <v-container fluid grid-list-lg>
+                <v-container grid-list-lg>
                   <v-layout >
                     <v-flex>
                       <v-card color="grey lighten-4" class="dark--text"  ripple>
@@ -46,8 +46,7 @@
                         <v-icon >{{ !showDetails? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
                         </v-btn>
                         </v-card-actions>
-                        
-                           <v-card-text v-show="showDetails">
+                      <v-card-text v-show="showDetails">
                                 <h4>Description</h4>
                       <p>{{item.description}}</p>
                        <br>
@@ -128,40 +127,7 @@
                         <li v-for="ret in item.retailers" :key="ret.name">{{ret.name}}</li>
                       </ul>
                       <br>
-                      
-                      <br>
-                      <h4>Images</h4>
-                      <v-flex xs12 sm6 offset-sm3>
-                        <v-card>
-                          <v-container grid-list-sm fluid>
-                            <v-layout row wrap>
-                              <v-flex v-for="img in item.images" :key="img.url" xs4 d-flex>
-                                <v-card flat tile class="d-flex">
-                                  <v-img
-                                    :src="img.url"
-                                    aspect-ratio="1"
-                                    class="grey lighten-2"
-                                    contain
-                                  >
-                                    <v-layout
-                                      slot="placeholder"
-                                      fill-height
-                                      align-center
-                                      justify-center
-                                      ma-0
-                                    >
-                                      <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-                                    </v-layout>
-                                  </v-img>
-                                </v-card>
-                              </v-flex>
-                            </v-layout>
-                          </v-container>
-                        </v-card>
-                      </v-flex>
                            </v-card-text>
-                     
-                        
                       </v-card>
                     </v-flex>
                   </v-layout>
