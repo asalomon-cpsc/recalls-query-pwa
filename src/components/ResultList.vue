@@ -22,7 +22,7 @@
               </v-list-tile>
               <v-expansion-panel popout focusable>
                 <v-expansion-panel-content inset>
-                  <div slot="header">View Details</div>
+                  <div slot="header"></div>
                   <v-card ripple color="yelllow">
                     <v-card-text class="grey lighten-3">
                       <h4>Description</h4>

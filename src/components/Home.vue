@@ -14,7 +14,7 @@
         <div v-show="latestLoaded" class="section">
           <ul id="featured" class="d-flex">
             <li v-for="(item,index) in latestRecalls" v-bind:key="index">
-              <v-card flat>
+              <v-card flat hover >
                 <v-container grid-list-lg>
                   <v-layout>
                     <v-flex>
@@ -38,12 +38,8 @@
                           </div>
                         </v-card-text>
                         <v-card-actions>
-
-                          <v-btn large round raised ripple outline color="orange" @click="showDetails =!showDetails">
-                            {{ !showDetails? 'View Details' : 'Hide Details' }}
-                          </v-btn>
                           <v-spacer></v-spacer>
-                          <v-btn large round raised ripple outline icon @click="showDetails =!showDetails">
+                          <v-btn large round raised ripple outline color="orange" icon  @click="showDetails =!showDetails">
                             <v-icon>{{ !showDetails? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
                           </v-btn>
                         </v-card-actions>
