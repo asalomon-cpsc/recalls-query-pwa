@@ -23,7 +23,7 @@
               <v-expansion-panel popout focusable>
                 <v-expansion-panel-content inset>
                   <div slot="header"></div>
-                  <v-card ripple color="yelllow">
+                  <v-card ripple>
                     <v-card-text class="grey lighten-3">
                       <h4>Description</h4>
                       <p>{{item.description}}</p>
