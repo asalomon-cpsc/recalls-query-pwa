@@ -1,7 +1,7 @@
 <template>
   <v-container>
-    <v-layout align-center>
-      <v-flex xs12 sm12 md12 lg12 xl12>
+    <v-layout row wrap>
+      <v-flex >
         <h4 class="grey--text">Latest Recalls</h4>
         <v-layout>
           <v-flex xs12 sm12 class="centered" v-show="!latestLoaded">
@@ -23,8 +23,9 @@
         </v-layout>
         <div v-show="latestLoaded" class="section">
           <ul id="featured" class="d-flex">
-            <li v-for="(item,index) in latestRecalls" v-bind:key="index" class="pr-2">
-              <v-card flat active-class="warning" hover class="mb-1">
+            <li v-for="(item,index) in latestRecalls" v-bind:key="index" class="pr-15">
+              <v-card flat hover class="mb-1">
+                <v-container grid-list-lg>
                 <v-layout align-center>
                   <v-flex xs12 sm12 md12 lg12 xl12>
                     <v-card color="grey lighten-4" raised class="dark--text" ripple>
@@ -138,6 +139,7 @@
                     </v-card>
                   </v-flex>
                 </v-layout>
+                </v-container>
               </v-card>
             </li>
           </ul>
@@ -244,6 +246,8 @@ ul#featured {
 
 ul#featured li {
   width: calc(100% - 10px);
+  margin-left: 10px;
+  padding-left: 10px;
   -webkit-scroll-snap-align: start;
   scroll-snap-align: start;
 }
