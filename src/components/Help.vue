@@ -128,7 +128,7 @@
                      </div>
                     
                     <v-img
-                      src="/static/assets/latest_recalls.png"
+                      src="/static/assets/filter.png"
                       contain
                       max-height="510"
                       max-width="510"
