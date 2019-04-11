@@ -50,9 +50,9 @@
                         1. Navigate back and forth between the search result and the latest recalls (Home/Landing page) with the bottom navigation bar.
                         </div>
                       </v-card-text>
-                        <div class="align-center">
-                        <v-img src="/static/assets/navigation.png" max-height="300"
-                        max-width="300"></v-img>
+                        <div >
+                        <v-img src="/static/assets/navigation.png" contain max-height="500"
+                        max-width="500"></v-img>
                        </div>
                        <v-card-text>
                        <div>
@@ -65,12 +65,6 @@
                         3. Click on the Search icon(<v-icon color="black" >search</v-icon> ) to go back to the search results page.
                       </div>
                     </v-card-text>
-                    <v-img
-                      src="/static/assets/latest_recalls.png"
-                      contain
-                      max-height="510"
-                      max-width="510"
-                    ></v-img>
                   </div>
                 </v-card>
                 
@@ -102,7 +96,7 @@
                        </v-card-text>
                        <v-card-text>
                       <div>
-                        3. Then click on the “apply” button ( <v-img max-height="75"
+                        3. Then click on the “apply” button ( <v-img max-height="75" contain
                       max-width="75" src="/static/assets/apply.png" alt="apply" ></v-img> ) and if any records are found, the number of records will be displayed.
                       </div>
                        </v-card-text>
@@ -157,8 +151,7 @@
 
                       <div>
                         To View Details of a recall while scrolling through the search results, expand the recall card by  clicking on the down arrow or by clicking on the view details button
-
-                              <v-img max-height="510" contain
+                       <v-img max-height="510" contain
                       max-width="510" src="/static/assets/search_result_1.png" alt="search_result1!" > </v-img>
                       </div>
                       </v-card-text>
