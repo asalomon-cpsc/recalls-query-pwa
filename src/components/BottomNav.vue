@@ -15,7 +15,7 @@
         <span>{{tiles[1].title}}</span>
         <v-icon color="black" >home</v-icon>
       </v-btn>
-      <v-btn dark color="black" flat :value="help.title"  @click="redirectToGuide()">
+      <v-btn dark color="black" flat :value="help.title" to="help">
         <span>{{help.title}}</span>
             <v-icon color="black" >help</v-icon>
       </v-btn>

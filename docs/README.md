@@ -2,56 +2,9 @@
 
 # User Guide
 
-## Installation
- 
-### IOS Devices (Iphone, Ipad) 
-<img src="./assets/ios/icons8-ios-logo-50.png" alt="ios" >
-
-
-
-1.	Navigate to [https://m-recalls.cpsc.gov](https://m-recalls.cpsc.gov) using *Safari* from your IOS device.
-
-
-2.	Click on “Share” icon present at the bottom of the *Safari* browser
-
-    <img src="./assets/ios/iphone_step1.png" alt="ios step 1" > 
-
-
-3.	Click on the “Add to Home Screen” button
-
-    <img src="./assets/ios/iphone_step2.png" alt="ios step 2" > 
-
-
-4.	The add to home prompt comes up, click on “Add”
-
-    <img src="./assets/ios/iphone_step3.png" alt="ios step 3" > 
-
-
-5.	Look for CPSC Icon on iPhone home screen
-
-    <img src="./assets/ios/iphone_step4.png" alt="ios step 4" > 
-
-
-### Android Devices 
-<img src="./assets/Android/icons8-android-os-48.png" alt="Android Icon" > 
-
-1. Navigate to [https://m-recalls.cpsc.gov](https://m-recalls.cpsc.gov) from your Android device.
-
-2. You should automatically be prompted to install the app.
-   
-3. Click on “Add” in the installation prompt as in the image below.
-
-    <img src="./assets/Android/Android_Step1.jpg" alt="Android" > 
-
-4. Look for the *CPSCRecalls* Icon on your device’s home screen then click on it.
-
-    <img src="./assets/Android/Android_Step2.jpg" alt="Android2" > 
-
-5. The app opens initially with the latest 15 recalls displayed.
-
 ## Home Page
 
-The home page displayed the latest 15 recalls. Scroll or swipe right to continue viewing latest recalls.
+The home page displays the latest 15 recalls. Scroll or swipe right/left to continue viewing latest recalls.
 
   <img src="./assets/latest_recalls.png" alt="latest recalls" > 
 
@@ -102,3 +55,49 @@ The Company and the Product Type fields are only available as additional filters
 
     <img src="./assets/search_result_detail.png" alt="search result detail" >
 
+## Installation
+ 
+### IOS Devices (Iphone, Ipad) 
+<img src="./assets/ios/icons8-ios-logo-50.png" alt="ios" >
+
+
+
+1.	Navigate to [https://m-recalls.cpsc.gov](https://m-recalls.cpsc.gov) using *Safari* from your IOS device.
+
+
+2.	Click on “Share” icon present at the bottom of the *Safari* browser
+
+    <img src="./assets/ios/iphone_step1.png" alt="ios step 1" > 
+
+
+3.	Click on the “Add to Home Screen” button
+
+    <img src="./assets/ios/iphone_step2.png" alt="ios step 2" > 
+
+
+4.	The add to home prompt comes up, click on “Add”
+
+    <img src="./assets/ios/iphone_step3.png" alt="ios step 3" > 
+
+
+5.	Look for CPSC Icon on iPhone home screen
+
+    <img src="./assets/ios/iphone_step4.png" alt="ios step 4" > 
+
+
+### Android Devices 
+<img src="./assets/Android/icons8-android-os-48.png" alt="Android Icon" > 
+
+1. Navigate to [https://m-recalls.cpsc.gov](https://m-recalls.cpsc.gov) from your Android device.
+
+2. You should automatically be prompted to install the app.
+   
+3. Click on “Add” in the installation prompt as in the image below.
+
+    <img src="./assets/Android/Android_Step1.jpg" alt="Android" > 
+
+4. Look for the *CPSCRecalls* Icon on your device’s home screen then click on it.
+
+    <img src="./assets/Android/Android_Step2.jpg" alt="Android2" > 
+
+5. The app opens initially with the latest 15 recalls displayed.

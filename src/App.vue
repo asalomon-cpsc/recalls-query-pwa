@@ -8,19 +8,15 @@
     <v-toolbar color="indigo darken-1" dark dense app fixed id="toolbar">
       <v-toolbar-title v-text="title" color="white">
       </v-toolbar-title>
-      
-
       <div class="d-flex align-center " style="margin-left: auto">
         <v-bottom-sheet v-if="!beforeinstallpromptfired" v-model="sheet" v-touch="{
               up: () => swipe('up'),
               down: () => swipe('down')
             }"
           lazy>
-
           <v-btn slot="activator" dark flat value="info">
             <v-icon color="orange lighten-2">info</v-icon>
           </v-btn>
-
           <v-card raised ripple class=" flex text-xs-center">
             <v-card-title primary-title class="justify-center">
               <footer-info> </footer-Info>
