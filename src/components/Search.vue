@@ -1,137 +1,134 @@
 <template >
-
-<v-container >
-        <v-layout   wrap>
-
+  <v-container>
+    <v-layout wrap>
       <!--<v-flex xs12 sm12 md4 lg4 xl4>-->
-       <div id="search">
-        <v-form   ref="form"  >
-    <v-text-field
-      append-icon="title"
-      color="green darken-2"
-      label="Search For"
-      v-model="searchFor"
-      clearable
-      @keyup.enter.tab="submit()"
-    >
-    </v-text-field>
-    <v-text-field
-    append-icon="title"
-     color="purple darken-2"
-      label="Product Name"
-      clearable
-      v-model="productName"
-      @keyup.enter.tab="submit()"
-    ></v-text-field>
-   
+      <div id="search">
+        <v-form ref="form">
+          <v-text-field
+            append-icon="title"
+            color="green darken-2"
+            label="Search For"
+            v-model="searchFor"
+            clearable
+            @keyup.enter.tab="submit()"
+          ></v-text-field>
+          <v-text-field
+            append-icon="title"
+            color="purple darken-2"
+            label="Product Name"
+            clearable
+            v-model="productName"
+            @keyup.enter.tab="submit()"
+          ></v-text-field>
 
-    <v-select
-     v-show="hasResult"
-    :disabled="formState.cleared && !manufacturers.length>0"
-     append-icon="business"
-      label="Company"
-      v-model="manufacturer"
-      :items="manufacturers"
-      clearable
-    ></v-select>
-    
-    <v-select
-    v-show="hasResult"
-    :disabled="formState.cleared && !productTypes.length>0"
-    appenda-icon="battery_unknown"
-      label="Product Type"
-      v-model="productType"
-      :items="productTypes"
-      clearable
-    ></v-select>
-    <v-text-field
-     append-icon="battery_unknown"
-      label="Product Model"
-      v-model.trim="productModel"
-      :value="productModel"
-    ></v-text-field>
-    <v-select
-     append-icon="date_range"
-     color="orange darken-2"
-      label="Date Range"
-      v-model="relativeDate"
-      :items="relativeDates"
-      
-      clearable
-    ></v-select>
+          <v-select
+            v-show="hasResult"
+            :disabled="formState.cleared && !manufacturers.length>0"
+            append-icon="business"
+            label="Company"
+            v-model="manufacturer"
+            :items="manufacturers"
+            clearable
+          ></v-select>
 
-    <v-btn  small round  @click="clear()" color="indigo darken-1" dark   >
-      Reset
-      <v-icon color="orange lighten-2" right>refresh</v-icon>
-      </v-btn>
-      <v-btn
-      small
-      round
-      color="indigo darken-1"
-      class="white--text"
-      :loading="showProgress && !hasResult && !isError"
-      @click.prevent.stop="isAtLeastOneFieldValid?submit():showFormValidDialog=true"
-      :disabled="showProgress && !hasResult && !isError"
-      
-    >
-      Apply
-       <v-icon color="green lighten-2" light right>check_circle</v-icon>
-      
-    </v-btn>
-    
-  </v-form>
-  </div>
-   <v-alert v-if="!hasResult && formState.completed" color="grey"  icon="info" :value="true"
-      type="info"
-      transition="scale-transition">
-      No records found
-    </v-alert>
-    <v-alert v-else-if=" resultCount > 0 && formState.completed" color="grey" icon="info" :value="true"
-      type="info">
-      {{resultCount}} record(s) found
-    </v-alert>
+          <v-select
+            v-show="hasResult"
+            :disabled="formState.cleared && !productTypes.length>0"
+            appenda-icon="battery_unknown"
+            label="Product Type"
+            v-model="productType"
+            :items="productTypes"
+            clearable
+          ></v-select>
+          <v-text-field
+            append-icon="battery_unknown"
+            label="Product Model"
+            v-model.trim="productModel"
+            :value="productModel"
+          ></v-text-field>
+          <v-select
+            append-icon="date_range"
+            color="orange darken-2"
+            label="Date Range"
+            v-model="relativeDate"
+            :items="relativeDates"
+            clearable
+          ></v-select>
 
-    <!--</v-flex>-->
-   
-   
-   <v-flex v-if="isError">
-    <div>
-    <v-alert color="error" icon="warning" value="true">
-      Error communicating with the back end service, please try again later
-    </v-alert>
-  </div>
-  
-    </v-flex>
-    
-   <!-- <result-list v-if="hasResult" :recalls="recalls"></result-list>
-    -->
-     
- <v-dialog v-model="showFormValidDialog" max-width="500px">
+          <v-btn small round @click="clear()" color="indigo darken-1" dark>
+            Reset
+            <v-icon color="orange lighten-2" right>refresh</v-icon>
+          </v-btn>
+          <v-btn
+            small
+            round
+            color="indigo darken-1"
+            class="white--text"
+            :loading="showProgress && !hasResult && !isError"
+            @click.prevent.stop="isAtLeastOneFieldValid?submit():showFormValidDialog=true"
+            :disabled="showProgress && !hasResult && !isError"
+          >
+            Apply
+            <v-icon color="green lighten-2" light right>check_circle</v-icon>
+          </v-btn>
+        </v-form>
+      </div>
+      <v-alert
+        v-if="!hasResult && formState.completed"
+        color="grey"
+        icon="info"
+        :value="true"
+        type="info"
+        transition="scale-transition"
+      >No records found</v-alert>
+      <v-alert
+        v-else-if=" resultCount > 0 && formState.completed"
+        color="grey"
+        icon="info"
+        :value="true"
+        type="info"
+      >{{resultCount}} record(s) found</v-alert>
+
+      <!--</v-flex>-->
+
+      <v-flex v-if="isError">
+        <div>
+          <v-alert
+            color="error"
+            icon="warning"
+            value="true"
+          >Error communicating with the back end service, please try again later</v-alert>
+        </div>
+      </v-flex>
+
+      <!-- <result-list v-if="hasResult" :recalls="recalls"></result-list>
+      -->
+
+      <v-dialog v-model="showFormValidDialog" max-width="500px">
         <v-card>
           <v-card-title>
-            <span><v-icon left medium >block</v-icon>Validation</span>
+            <span>
+              <v-icon left medium>block</v-icon>Validation
+            </span>
             <v-spacer></v-spacer>
-            
           </v-card-title>
-          
-          <v-card-text>  At least one field is required in order to initiate a search</v-card-text>
+
+          <v-card-text>At least one field is required in order to initiate a search</v-card-text>
           <v-card-actions>
             <v-btn color="primary" flat @click.stop="showFormValidDialog=false">Close</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
     </v-layout>
-      </v-container>
+  </v-container>
 </template>
 
 <script>
-
 import axios from "axios";
 import moment from "moment";
-import {  EventBus } from "../eventBus.js";
+import { EventBus } from "../eventBus.js";
 export default {
   name: "search",
-  
   data: function() {
     return {
       showProgress: false,
@@ -143,7 +140,7 @@ export default {
       loader: null,
       searchFor: "",
       productName: "",
-      manufacturer: "" ,
+      manufacturer: "",
       productType: "",
       productModel: "",
       relativeDate: "",
@@ -180,8 +177,8 @@ export default {
     hasResult: function() {
       return this.resultCount > 0 ? true : false;
     },
-    clearDropDowns(){
-      formState.cleared && !productTypes.length> 0
+    clearDropDowns() {
+      formState.cleared && !productTypes.length > 0;
     },
 
     isAtLeastOneFieldValid: function() {
@@ -193,8 +190,9 @@ export default {
         (vm.manufacturer !== undefined && vm.manufacturer !== "") ||
         (vm.productModel !== undefined && vm.productModel !== "") ||
         (vm.productType !== undefined && vm.productType !== "") ||
-        (vm.relativeDate !== undefined && vm.relativeDate !== ""&& vm.relativeDate > 0
-        )
+        (vm.relativeDate !== undefined &&
+          vm.relativeDate !== "" &&
+          vm.relativeDate > 0)
       );
     }
   },
@@ -219,7 +217,7 @@ export default {
           .format("YYYY-MM-DD");
       } else {
         vm.recallDates.recallEndDate = "";
-        vm.recallDates.recallStartDate = "1970-01-01"; 
+        vm.recallDates.recallStartDate = "1970-01-01";
       }
     },
     submit() {
@@ -245,26 +243,25 @@ export default {
             withcredentials: false
           })
           .then(response => {
-             vm.handleResponse(response);
-              EventBus.$emit("searchResultFetched", {
-                resultCount: vm.resultCount,
-                recalls: vm.recalls
-             });
+            vm.handleResponse(response);
+            EventBus.$emit("searchResultFetched", {
+              resultCount: vm.resultCount,
+              recalls: vm.recalls
+            });
             if (response.data.resultCount === 0) {
               vm.showProgress = false;
               vm.formState.started = false;
               vm.formState.completed = true;
-              vm.manufacturer="";
-              vm.productTypes=[];//need to reset those filter values since they will be invisible but still bound to model
+              vm.manufacturer = "";
+              vm.productTypes = []; //need to reset those filter values since they will be invisible but still bound to model
               vm.recalls = [];
             }
           })
           .catch(error => {
             vm.isError = true;
             vm.formState.completed = true;
-            
           });
-          this.$router.push("resultList");//show resultlist route
+        this.$router.push("resultList"); //show resultlist route
       }
     },
     mapRequestParams() {
@@ -277,36 +274,36 @@ export default {
         productModel: vm.productModel ? vm.productModel : "",
         recallDateEnd: vm.relativeDate > 0 ? vm.recallDates.recallEndDate : "",
         recallDateStart:
-          vm.relativeDate > 0 ? vm.recallDates.recallStartDate : "1970-01-01",
+          vm.relativeDate > 0 ? vm.recallDates.recallStartDate : "1970-01-01"
       };
     },
     handleResponse(response) {
       const vm = this;
       //clear dropdowns
-      vm.manufacturers=[]
-      vm.productTypes=[]
+      vm.manufacturers = [];
+      vm.productTypes = [];
       response.data.recalls.forEach(element => {
         element.manufacturers.forEach(m => {
-          if(m.name!= undefined){
-          vm.manufacturers.push(m.name);
+          if (m.name != undefined) {
+            vm.manufacturers.push(m.name);
           }
         });
         element.products.forEach(p => {
-          if(p.type!= undefined){
-          vm.productTypes.push(p.type);
+          if (p.type != undefined) {
+            vm.productTypes.push(p.type);
           }
         });
         vm.recalls.push({
           title: element.title,
           consumerContact: element.consumerContact,
-          recallNumber:vm.formatRecallNumber(element.recallNumber),
+          recallNumber: element.recallNumber,
           url: element.url,
           recallDate: moment(element.recallDate).format("MMM Do YYYY"),
           images: element.images, //use array functions to filter
           description: element.description,
           products: element.products,
           injuries: element.injuries,
-          manufacturers: element.manufacturers? element.manufacturers: [],
+          manufacturers: element.manufacturers ? element.manufacturers : [],
           manufacturerCountries: element.manufacturerCountries,
           productUpcs: element.productUPCs,
           hazards: element.hazards,
@@ -318,14 +315,10 @@ export default {
 
       vm.formState.completed = true;
     },
-    formatRecallNumber(recallNumber){
-      let formattedNumber = recallNumber?recallNumber.substring(0,2).concat('-',recallNumber.substring(2,recallNumber.length)):'00-00000'
-      return formattedNumber
-    },
     clear() {
       this.$refs.form.reset();
-      this.productTypes=[]
-      this.manufacturers=[]
+      this.productTypes = [];
+      this.manufacturers = [];
       this.resultCount = 0;
       this.showProgress = false;
       this.isError = false;
