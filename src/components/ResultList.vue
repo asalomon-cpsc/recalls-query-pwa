@@ -5,102 +5,38 @@
         <v-list three-line>
           <v-subheader>Recalls ({{recalls?recalls.length:0}})</v-subheader>
           <no-records v-if="recalls.length===0"></no-records>
-          <template v-if="recalls.length> 0" v-for="(item,index) in recalls">
-            <v-card active-class="warning" hover raised v-bind:key="item.recallNumber" class="mb-1">
-              <v-list-tile v-bind:size="thumbSize" ripple v-bind:key="index">
-                <a v-bind:href="avatarUrl(item)" target="_blank">
-                  <v-list-tile-avatar tile size="55">
-                    <img v-bind:src="avatarUrl(item)" alt>
-                  </v-list-tile-avatar>
-                </a>
-                <v-list-tile-content>
-                  <v-list-tile-title v-text="item.recallDate"></v-list-tile-title>
-                  <v-list-tile-sub-title>
-                    <span class="grey--text text--darken-2">{{item.title}}</span>
-                  </v-list-tile-sub-title>
-                </v-list-tile-content>
-              </v-list-tile>
-              <v-expansion-panel popout focusable>
-                <v-expansion-panel-content inset>
-                  <div slot="header"></div>
-                  <v-card ripple>
-                    <v-card-text class="grey lighten-3">
-                      <h4>Description</h4>
-                      <p>{{item.description}}</p>
-                      <h4>Recall Number</h4>
-                      <p>{{item.recallNumber}}</p>
-                      <h4>Consumer Contact</h4>
-                      <p>{{item.consumerContact}}</p>
-                      <h4>Products</h4>
-                      <ul>
-                        <li v-for="p in item.products" :key="p.name">
-                          <span>
-                            <strong>Name:</strong>
-                            {{p.name}}
-                          </span>
-                          <br>
-                          <span>
-                            <strong>Type:</strong>
-                            {{p.type}}
-                          </span>
-                          <br>
-                          <span>
-                            <strong>Units Sold:</strong>
-                            {{p.numberOfUnits}}
-                          </span>
-                        </li>
-                      </ul>
-                      <br>
-
-                      <h4>Injuries</h4>
-                      <span v-for="i in item.injuries" :key="i.name">
-                        <p>{{i.name}}</p>
-                      </span>
-                      <br>
-
-                      <h4>Manufacturers</h4>
-                      <ul>
-                        <li v-for="m in item.manufacturers" :key="m.name">{{m.name}}</li>
-                      </ul>
-                      <br>
-                      <h4>Manufacturer Countries</h4>
-                      <ul>
-                        <li
-                          v-for="mc in item.manufacturerCountries"
-                          :key="mc.country"
-                        >{{mc.country}}</li>
-                      </ul>
-                      <br>
-                      <h4>ProductUpcs</h4>
-                      <ul>
-                        <li v-for="upc in item.productUpcs" :key="upc.upc">{{upc.upc}}</li>
-                      </ul>
-                      <br>
-                      <h4>Hazards</h4>
-                      <ul>
-                        <li v-for="haz in item.hazards" :key="haz.name">{{haz.name}}</li>
-                      </ul>
-                      <br>
-                      <h4>Remedies</h4>
-                      <ul>
-                        <li v-for="r in item.remedies" :key="r.name">{{r.name}}</li>
-                      </ul>
-                      <br>
-                      <h4>Retailers</h4>
-                      <ul>
-                        <li v-for="ret in item.retailers" :key="ret.name">{{ret.name}}</li>
-                      </ul>
-                      
-                    </v-card-text>
-                    <v-divider></v-divider>
-                   
-                     
-                  </v-card>
-                </v-expansion-panel-content>
-              </v-expansion-panel>
-            </v-card>
-            <v-divider inset light @click></v-divider>
-          </template>
+          <div v-if="recalls.length> 0">
+            <template v-for="(item,index) in recalls">
+              <v-card
+                active-class="warning"
+                hover
+                raised
+                v-bind:key="item.recallNumber"
+                class="mb-1"
+              >
+                <v-list-tile v-bind:size="thumbSize" ripple v-bind:key="index">
+                  <a v-bind:href="avatarUrl(item)" target="_blank">
+                    <v-list-tile-avatar tile size="55">
+                      <img v-bind:src="avatarUrl(item)" alt />
+                    </v-list-tile-avatar>
+                  </a>
+                  <v-list-tile-content>
+                    <v-list-tile-title v-text="item.recallDate"></v-list-tile-title>
+                    <v-list-tile-sub-title>
+                      <span class="grey--text text--darken-2">{{item.title}}</span>
+                    </v-list-tile-sub-title>
+                  </v-list-tile-content>
+                </v-list-tile>
+                <v-expansion-panel popout focusable>
+                  <v-expansion-panel-content inset>
+                    <div slot="header"></div>
+                    <recall-details :item="item"></recall-details>
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+              </v-card>
+              <v-divider inset light @click></v-divider>
+            </template>
+          </div>
         </v-list>
       </v-flex>
     </v-layout>
@@ -110,10 +46,12 @@
 <script>
 import { EventBus } from "../eventBus.js";
 import noRecords from "./NoRecords.vue";
+import RecallDetails from "./RecallDetails.vue";
 export default {
   name: "resultList",
   components: {
-    noRecords
+    noRecords,
+    RecallDetails
   },
   methods: {
     avatarUrl: function(item) {
@@ -159,7 +97,6 @@ export default {
         easing: this.easing
       };
     }
-
   },
   data: function() {
     return {
