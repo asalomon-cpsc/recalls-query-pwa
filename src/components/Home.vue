@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-layout row wrap>
-      <v-flex >
+      <v-flex>
         <h4 class="grey--text">Latest Recalls</h4>
         <v-layout>
           <v-flex xs12 sm12 class="centered" v-show="!latestLoaded">
@@ -17,7 +17,7 @@
                 height="100"
                 src="https://www.cpsc.gov/sites/all/themes/cpsc/images/logo.png"
                 alt="cpsc"
-              >
+              />
             </v-progress-circular>
           </v-flex>
         </v-layout>
@@ -26,119 +26,51 @@
             <li v-for="(item,index) in latestRecalls" v-bind:key="index" class="pr-15">
               <v-card flat hover class="mb-1">
                 <v-container grid-list-lg>
-                <v-layout align-center>
-                  <v-flex xs12 sm12 md12 lg12 xl12>
-                    <v-card color="grey lighten-4" raised class="dark--text" ripple>
-                      <v-img
-                        contain
-                        :src="item.images[0].url"
-                        class="black--text"
-                        height="240"
-                        aspect-ratio="1"
-                      ></v-img>
-                      <v-divider light></v-divider>
-                      <v-card>
-                        <v-card-text>
-                          <div>
-                            <div class="text-truncate">
-                              <strong>Title:</strong>
-                              <br>
-                              <span>{{item.title}}</span>
+                  <v-layout align-center>
+                    <v-flex xs12 sm12 md12 lg12 xl12>
+                      <v-card color="grey lighten-4" raised ripple>
+                        <v-img
+                          contain
+                          :src="item.images[0].url"
+                          class="black--text"
+                          height="240"
+                          aspect-ratio="1"
+                        ></v-img>
+                        <v-divider light></v-divider>
+                        <v-card>
+                          <v-card-title>
+                            <div>
+                              <div class="text-truncate mb-1">
+                                <strong>Title:</strong>
+                                <br />
+                                <span>{{item.title}}</span>
+                              </div>
+                              <div class="text-truncate mb-1">
+                                <strong>Recall Date:</strong>
+                                <br />
+                                <span>{{item.recallDate}}</span>
+                              </div>
+                              <div class="text-truncate mb-1">
+                                <strong>Products:</strong>
+                                <br />
+                                <span>{{item.products[0].name}}</span>
+                              </div>
                             </div>
-                            <div class="text-truncate">
-                              <strong>Recall Date:</strong>
-                              <br>
-                              <span>{{item.recallDate}}</span>
-                            </div>
-                            <div class="text-truncate">
-                              <strong>Products:</strong>
-                              <br>
-                              <span>{{item.products[0].name}}</span>
-                            </div>
-                          </div>
-                        </v-card-text>
+                          </v-card-title>
+                        </v-card>
+                        <v-card>
+                          <v-card-actions>
+                            <v-expansion-panel focusable>
+                              <v-expansion-panel-content>
+                                <div slot="header"></div>
+                                <recall-details :item="item"></recall-details>
+                              </v-expansion-panel-content>
+                            </v-expansion-panel>
+                          </v-card-actions>
+                        </v-card>
                       </v-card>
-                      <v-card>
-                        <v-card-actions>
-                          <v-expansion-panel focusable>
-                            <v-expansion-panel-content>
-                              <div slot="header"></div>
-                              <v-card ripple color="transparent">
-                                <v-card-text>
-                                  <h4>Description</h4>
-                                  <p>{{item.description}}</p>
-
-                                  <h4>Recall Number</h4>
-                                  <p>{{item.recallNumber}}</p>
-
-                                  <h4>Consumer Contact</h4>
-                                  <p>{{item.consumerContact}}</p>
-
-                                  <h4>Products</h4>
-                                  <ul>
-                                    <li v-for="p in item.products" :key="p.name">
-                                      <span>
-                                        <strong>Name:</strong>
-                                        {{p.name}}
-                                      </span>
-                                      <br>
-                                      <span>
-                                        <strong>Type:</strong>
-                                        {{p.type}}
-                                      </span>
-                                      <br>
-                                      <span>
-                                        <strong>Units Sold:</strong>
-                                        {{p.numberOfUnits}}
-                                      </span>
-                                    </li>
-                                  </ul>
-                                  <br>
-                                  <h4>Injuries</h4>
-                                  <span v-for="i in item.injuries" :key="i.name">
-                                    <p>{{i.name}}</p>
-                                  </span>
-                                  <br>
-                                  <h4>Manufacturers</h4>
-                                  <ul>
-                                    <li v-for="m in item.manufacturers" :key="m.name">{{m.name}}</li>
-                                  </ul>
-                                  <br>
-                                  <h4>Manufacturer Countries</h4>
-                                  <ul>
-                                    <li
-                                      v-for="mc in item.manufacturerCountries"
-                                      :key="mc.country"
-                                    >{{mc.country}}</li>
-                                  </ul>
-                                  <br>
-
-                                  <h4>Hazards</h4>
-                                  <ul>
-                                    <li v-for="haz in item.hazards" :key="haz.name">{{haz.name}}</li>
-                                  </ul>
-                                  <br>
-
-                                  <h4>Remedies</h4>
-                                  <ul>
-                                    <li v-for="item in item.remedies" :key="item.name">{{item.name}}</li>
-                                  </ul>
-                                  <br>
-                                  <h4>Retailers</h4>
-
-                                  <ul>
-                                    <li v-for="ret in item.retailers" :key="ret.name">{{ret.name}}</li>
-                                  </ul>
-                                  <br>
-                                </v-card-text>
-                              </v-card>
-                            </v-expansion-panel-content>
-                          </v-expansion-panel>
-                        </v-card-actions>
-                      </v-card>
-                    </v-card>
-                  </v-flex>
-                </v-layout>
+                    </v-flex>
+                  </v-layout>
                 </v-container>
               </v-card>
             </li>
@@ -151,9 +83,13 @@
 <script>
 import axios from "axios";
 import moment from "moment";
+import RecallDetails from "./RecallDetails.vue";
 import { EventBus } from "../eventBus.js";
 export default {
   name: "home",
+  components: {
+    RecallDetails
+  },
   data: function() {
     return {
       recalls: [],

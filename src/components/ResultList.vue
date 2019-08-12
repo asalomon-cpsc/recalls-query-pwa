@@ -115,7 +115,7 @@ export default {
 };
 </script>
 <style scoped>
-thumbwrap {
+.thumbwrap {
   margin: 75px auto;
   width: 252px;
   height: 252px;
