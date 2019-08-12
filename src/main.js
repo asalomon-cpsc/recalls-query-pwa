@@ -13,6 +13,10 @@ Vue.filter('trim', function (value) {
   value = value.toString()
   return value.trim()
 })
+Vue.directive('format-recall-num', function (el, binding) {
+  el.innerHTML = binding.value ? binding.value.substring(0, 2).concat('-', binding.value.substring(2, binding.value.length)) : '00-00000'
+
+})
 
 /* eslint-disable no-new */
 new Vue({
