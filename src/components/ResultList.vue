@@ -34,8 +34,8 @@
                   </v-expansion-panel-content>
                 </v-expansion-panel>
               </v-card>
-              <v-divider inset light @click></v-divider>
             </template>
+            <v-divider inset light></v-divider>
           </div>
         </v-list>
       </v-flex>
