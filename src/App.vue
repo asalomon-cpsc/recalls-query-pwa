@@ -37,10 +37,10 @@
         </v-btn>
 
       </div>
-      
+
     </v-toolbar>
 
-    <v-content id="content">
+    <v-content id="content"  >
       <keep-alive>
         <router-view />
       </keep-alive>
@@ -53,7 +53,7 @@
         Close
       </v-btn>
     </v-snackbar>
-    
+
 
     <bottom-nav v-if="showOnSmAndDown"></bottom-nav>
     <mfooter v-if="showOnMdAndUp"></mfooter>
@@ -123,10 +123,10 @@ export default {
       return this.$vuetify.breakpoint.smAndDown;
     },
     showInstallDialog(){
-      return !this.isChromeForIosBrowser() && this.isIosMobileDevice() && !this.isAppAlreadyInstalled() 
+      return !this.isChromeForIosBrowser() && this.isIosMobileDevice() && !this.isAppAlreadyInstalled()
     }
   },
-  
+
   mounted() {
     const vm = this;
     EventBus.$on("searchNavButtonClicked", val => {
@@ -142,7 +142,7 @@ export default {
     });
     console.log('device browser: ' + vm.getBrowserId(vm.browsers))
     console.log('device platform: ' + vm.getDevicePlatform())
-     
+
     window.addEventListener("beforeinstallprompt", e => {
       // Prevent Chrome 67 and earlier from automatically showing the
       e.preventDefault();
@@ -168,7 +168,7 @@ export default {
             withCredentials: false
           })
           .catch(error => {
-            
+
           });
       });
     });

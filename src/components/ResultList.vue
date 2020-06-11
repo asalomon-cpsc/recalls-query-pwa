@@ -1,9 +1,9 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <v-layout align-center>
-      <v-flex xs12 sm12 md12 lg12 xl12 id="resultList">
+      <v-flex xs12 sm12 id="resultList">
         <v-list three-line>
-          <v-subheader>Recalls ({{recalls?recalls.length:0}})</v-subheader>
+          <v-subheader>Recalls ({{resultCount}})</v-subheader>
           <no-records v-if="recalls.length===0"></no-records>
           <div v-if="recalls.length> 0">
             <template v-for="(item,index) in recalls">

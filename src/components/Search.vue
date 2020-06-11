@@ -5,19 +5,19 @@
       <div id="search">
         <v-form ref="form">
           <v-text-field
+            v-model="searchFor"
             append-icon="title"
             color="green darken-2"
             label="Search For"
-            v-model="searchFor"
             clearable
             @keyup.enter.tab="submit()"
           ></v-text-field>
           <v-text-field
+            v-model="productName"
             append-icon="title"
-            color="purple darken-2"
+            color="green darken-2"
             label="Product Name"
             clearable
-            v-model="productName"
             @keyup.enter.tab="submit()"
           ></v-text-field>
 
@@ -149,6 +149,7 @@ export default {
         recallStartDate: "",
         recallEndDate: ""
       },
+
       cpscRequest: {},
 
       manufacturers: [],
@@ -222,6 +223,7 @@ export default {
     },
     submit() {
       let vm = this;
+
       const cpscapi = process.env.ROOT_RECALLS_API;
       const apiRecallURL = cpscapi;
 
@@ -280,9 +282,10 @@ export default {
     handleResponse(response) {
       const vm = this;
       //clear dropdowns
+      const resultsLimit = 200;
       vm.manufacturers = [];
       vm.productTypes = [];
-      response.data.recalls.forEach(element => {
+      response.data.recalls.slice(0, resultsLimit).forEach(element => {
         element.manufacturers.forEach(m => {
           if (m.name != undefined) {
             vm.manufacturers.push(m.name);
