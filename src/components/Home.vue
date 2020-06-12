@@ -24,55 +24,51 @@
         <div v-show="latestLoaded" class="section">
           <ul id="featured" class="d-flex">
             <li v-for="(item,index) in latestRecalls" v-bind:key="index" class="pr-15">
-              <v-card flat hover class="mb-1">
-                <v-container grid-list-lg>
-                  <v-layout align-center>
-                    <v-flex xs12 sm12 md12 lg12 xl12>
-                      <v-card color="grey lighten-4" raised ripple>
-                        <v-img
-                          contain
-                          :src="item.images[0].url"
-                          class="black--text"
-                          height="240"
-                          aspect-ratio="1"
-                        ></v-img>
-                        <v-divider light></v-divider>
-                        <v-card>
-                          <v-card-title>
-                            <div>
-                              <div class="text-truncate mb-1">
-                                <strong>Title:</strong>
-                                <br />
-                                <span>{{item.title}}</span>
-                              </div>
-                              <div class="text-truncate mb-1">
-                                <strong>Recall Date:</strong>
-                                <br />
-                                <span>{{item.recallDate}}</span>
-                              </div>
-                              <div class="text-truncate mb-1">
-                                <strong>Products:</strong>
-                                <br />
-                                <span>{{item.products[0].name}}</span>
-                              </div>
-                            </div>
-                          </v-card-title>
-                        </v-card>
-                        <v-card>
-                          <v-card-actions>
-                            <v-expansion-panel focusable>
-                              <v-expansion-panel-content>
-                                <div slot="header"></div>
-                                <recall-details :item="item"></recall-details>
-                              </v-expansion-panel-content>
-                            </v-expansion-panel>
-                          </v-card-actions>
-                        </v-card>
-                      </v-card>
-                    </v-flex>
-                  </v-layout>
-                </v-container>
-              </v-card>
+              <v-layout align-center>
+                <v-flex xs12 sm12 md12 lg12 xl12>
+                  <v-card color="grey lighten-4" raised ripple>
+                    <v-img
+                      contain
+                      :src="item.images[0].url"
+                      class="black--text"
+                      height="240"
+                      aspect-ratio="1"
+                    ></v-img>
+                    <v-divider light></v-divider>
+                    <v-card>
+                      <v-card-title>
+                        <div>
+                          <div class="text-truncate">
+                            <strong>Title:</strong>
+                            <br />
+                            <span class="text-truncate">{{item.title}}</span>
+                          </div>
+                          <div class="text-truncate mb-1">
+                            <strong>Recall Date:</strong>
+                            <br />
+                            <span>{{item.recallDate}}</span>
+                          </div>
+                          <div class="text-truncate mb-1">
+                            <strong>Products:</strong>
+                            <br />
+                            <span>{{item.products[0].name}}</span>
+                          </div>
+                        </div>
+                      </v-card-title>
+                    </v-card>
+                    <v-card>
+                      <v-card-actions>
+                        <v-expansion-panel focusable>
+                          <v-expansion-panel-content>
+                            <div slot="header"></div>
+                            <recall-details :item="item"></recall-details>
+                          </v-expansion-panel-content>
+                        </v-expansion-panel>
+                      </v-card-actions>
+                    </v-card>
+                  </v-card>
+                </v-flex>
+              </v-layout>
             </li>
           </ul>
         </div>
