@@ -1,14 +1,17 @@
 <template>
-  <v-container>
-    <v-layout row wrap>
+  <v-container fluid>
+    <v-layout>
       <v-flex>
-        <h4 class="grey--text">Latest Recalls</h4>
+        <h3>
+          <span color="blue-grey darken-2" class="black--text">Latest Recalls</span>
+        </h3>
+
         <v-layout>
           <v-flex xs12 sm12 class="centered" v-show="!latestLoaded">
             <v-progress-circular
               color="orange lighten-2"
               :width="6"
-              :size="175"
+              :size="185"
               :indeterminate="true"
             >
               <img
@@ -21,57 +24,71 @@
             </v-progress-circular>
           </v-flex>
         </v-layout>
-        <div v-show="latestLoaded" class="section">
-          <ul id="featured" class="d-flex">
-            <li v-for="(item,index) in latestRecalls" v-bind:key="index" class="pr-15">
-              <v-layout align-center>
-                <v-flex xs12 sm12 md12 lg12 xl12>
-                  <v-card color="grey lighten-4" raised ripple>
-                    <v-img
-                      contain
-                      :src="item.images[0].url"
-                      class="black--text"
-                      height="240"
-                      aspect-ratio="1"
-                    ></v-img>
-                    <v-divider light></v-divider>
-                    <v-card>
-                      <v-card-title>
-                        <div>
-                          <div class="text-truncate">
-                            <strong>Title:</strong>
-                            <br />
-                            <span class="text-truncate">{{item.title}}</span>
-                          </div>
-                          <div class="text-truncate mb-1">
-                            <strong>Recall Date:</strong>
-                            <br />
-                            <span>{{item.recallDate}}</span>
-                          </div>
-                          <div class="text-truncate mb-1">
-                            <strong>Products:</strong>
-                            <br />
-                            <span>{{item.products[0].name}}</span>
-                          </div>
-                        </div>
-                      </v-card-title>
-                    </v-card>
-                    <v-card>
-                      <v-card-actions>
-                        <v-expansion-panel focusable>
-                          <v-expansion-panel-content>
-                            <div slot="header"></div>
-                            <recall-details :item="item"></recall-details>
-                          </v-expansion-panel-content>
-                        </v-expansion-panel>
-                      </v-card-actions>
-                    </v-card>
-                  </v-card>
+
+        <section flat tile v-show="latestLoaded" class="section">
+          <v-window v-model="onboarding">
+            <v-window-item v-for="item in latestRecalls" :key="`card-${item.recallNumber}`">
+              <v-card color="grey lighten-4" raised ripple>
+                <v-img
+                  contain
+                  :src="item.images[0].url"
+                  class="black--text"
+                  height="135"
+                  aspect-ratio="1"
+                ></v-img>
+                <v-divider light></v-divider>
+                <v-card>
+                  <v-card-title class="headline">
+                    <v-icon large left color="green darken-2">today</v-icon>
+                    <span class="title font-weight-light">{{item.recallDate}}</span>
+                  </v-card-title>
+                  <v-card-text>
+                    <div>
+                      <strong>Title:</strong>
+                      <br />
+                      <span>{{item.title}}</span>
+                    </div>
+
+                    <div>
+                      <strong>Products:</strong>
+                      <br />
+                      <span>{{item.products[0].name}}</span>
+                    </div>
+                  </v-card-text>
+                </v-card>
+
+                <v-expansion-panel focusable>
+                  <v-expansion-panel-content expand-icon="arrow_drop_down_circle">
+                    <div slot="header">
+                      <strong>Recall Details</strong>
+                    </div>
+                    <recall-details :item="item"></recall-details>
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+              </v-card>
+            </v-window-item>
+          </v-window>
+        </section>
+        <v-card-actions class="justify-space-between">
+          <v-container>
+            <v-item-group v-model="onboarding" class="text-xs-center" mandatory>
+              <v-layout row no-wrap>
+                <v-flex>
+                  <v-item v-for="n in latestRecalls.length" :key="`btn-${n}`">
+                    <v-btn
+                      slot-scope="{ active, toggle }"
+                      :input-value="active"
+                      icon
+                      @click="toggle"
+                    >
+                      <v-icon small>adjust</v-icon>
+                    </v-btn>
+                  </v-item>
                 </v-flex>
               </v-layout>
-            </li>
-          </ul>
-        </div>
+            </v-item-group>
+          </v-container>
+        </v-card-actions>
       </v-flex>
     </v-layout>
   </v-container>
@@ -95,7 +112,8 @@ export default {
       show: false,
       showDetails: false,
       latestLoaded: false,
-      latestChildrenLoaded: false
+      latestChildrenLoaded: false,
+      onboarding: 0
     };
   },
   computed: {
@@ -110,6 +128,14 @@ export default {
     EventBus.$emit("homePageLoaded", true);
   },
   methods: {
+    next() {
+      this.onboarding =
+        this.onboarding + 1 === this.length ? 0 : this.onboarding + 1;
+    },
+    prev() {
+      this.onboarding =
+        this.onboarding - 1 < 0 ? this.length - 1 : this.onboarding - 1;
+    },
     getRecalls() {
       let vm = this;
       const cpscapi = process.env.ROOT_RECALLS_API;

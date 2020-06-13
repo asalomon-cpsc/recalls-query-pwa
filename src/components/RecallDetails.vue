@@ -4,13 +4,26 @@
       <v-layout row wrap>
         <v-flex xs12>
           <v-card shaped>
-            <v-card-title class="headline">
-              Recall Number :
-              <span v-format-recall-num="item.recallNumber"></span>
-            </v-card-title>
-            <v-card-text>Recall Date: {{item.recallDate}}</v-card-text>
+            <v-card-text>
+              <strong>
+                Recall Number :
+                <span v-format-recall-num="item.recallNumber"></span>
+              </strong>
+            </v-card-text>
           </v-card>
         </v-flex>
+        <v-flex xs12>
+          <v-card shaped>
+            <v-card-title class="headline">
+              <v-icon large left color="green darken-2">build</v-icon>
+              <span class="title font-weight-light">Remedies:</span>
+            </v-card-title>
+            <v-card-text>
+              <div v-for="r in item.remedies">{{r.name}}</div>
+            </v-card-text>
+          </v-card>
+        </v-flex>
+
         <v-flex xs12>
           <v-card shaped>
             <v-card-title class="headline">
@@ -23,7 +36,7 @@
         <v-flex xs12>
           <v-card>
             <v-card-title class="headline">
-              <v-icon large left color="orange darken-2">watch</v-icon>
+              <v-icon large left color="brown darken-2">watch</v-icon>
               <span class="title font-weight-light">Products:</span>
             </v-card-title>
             <v-card-text>
@@ -69,21 +82,11 @@
             </v-card-text>
           </v-card>
         </v-flex>
+
         <v-flex xs12>
           <v-card shaped>
             <v-card-title class="headline">
-              <v-icon large left color="green darken-2">build</v-icon>
-              <span class="title font-weight-light">Remedies:</span>
-            </v-card-title>
-            <v-card-text>
-              <div v-for="r in item.remedies">{{r.name}}</div>
-            </v-card-text>
-          </v-card>
-        </v-flex>
-        <v-flex xs12>
-          <v-card shaped>
-            <v-card-title class="headline">
-              <v-icon large left color="orange darken-2">call</v-icon>
+              <v-icon large left color="blue darken-2">contact_phone</v-icon>
               <span class="title font-weight-light">Consumer Contact:</span>
             </v-card-title>
             <v-card-text>{{item.consumerContact}}</v-card-text>

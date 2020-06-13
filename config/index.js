@@ -51,13 +51,13 @@ module.exports = {
     proxyTable: {
       // proxy all requests starting with /api to target
       '/recall': {
-        target: 'http://localhost/recallMicroservice_Windows/recall',
+        target: 'http://localhost/RecPwaApi/recall',
         changeOrigin: true,
         pathRewrite: {
           '^/recall': ''
-        
-      },
-     
+
+        },
+
       }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"

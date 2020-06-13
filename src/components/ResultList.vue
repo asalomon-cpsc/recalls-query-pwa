@@ -2,42 +2,52 @@
   <v-container fluid>
     <v-layout align-center>
       <v-flex xs12 sm12 id="resultList">
-        <v-list three-line>
-          <v-subheader>Recalls ({{resultCount}})</v-subheader>
-          <no-records v-if="recalls.length===0"></no-records>
-          <div v-if="recalls.length> 0">
-            <template v-for="(item,index) in recalls">
-              <v-card
-                active-class="warning"
-                hover
-                raised
-                v-bind:key="item.recallNumber"
-                class="mb-1"
-              >
-                <v-list-tile v-bind:size="thumbSize" ripple v-bind:key="index">
-                  <a v-bind:href="avatarUrl(item)" target="_blank">
-                    <v-list-tile-avatar tile size="55">
-                      <img v-bind:src="avatarUrl(item)" alt />
-                    </v-list-tile-avatar>
-                  </a>
-                  <v-list-tile-content>
-                    <v-list-tile-title v-text="item.recallDate"></v-list-tile-title>
-                    <v-list-tile-sub-title>
-                      <span class="grey--text text--darken-2">{{item.title}}</span>
-                    </v-list-tile-sub-title>
-                  </v-list-tile-content>
-                </v-list-tile>
-                <v-expansion-panel popout focusable>
-                  <v-expansion-panel-content inset>
-                    <div slot="header"></div>
-                    <recall-details :item="item"></recall-details>
-                  </v-expansion-panel-content>
-                </v-expansion-panel>
-              </v-card>
-            </template>
-            <v-divider inset light></v-divider>
-          </div>
-        </v-list>
+        <v-subheader>Recalls ({{resultCount}})</v-subheader>
+        <no-records v-if="recalls.length===0"></no-records>
+        <div v-if="recalls.length> 0">
+          <template v-for="(item,index) in recalls">
+            <v-card active-class="warning" hover raised v-bind:key="item.recallNumber" class="mb-1">
+              <v-container fluid grid-list-lg>
+                <v-layout row wrap>
+                  <v-flex xs12>
+                    <v-card raised ripple hover elevation="5">
+                      <v-img :src="avatarUrl(item)" height="150px" contain aspect-ratio="1"></v-img>
+
+                      <v-layout row>
+                        <v-flex xs12>
+                          <v-card-title primary-title>
+                            <div>
+                              <div>
+                                <strong>Recall Date:</strong>
+                                {{item.recallDate}}
+                              </div>
+                              <div>
+                                <strong>Title:</strong>
+                                {{item.title}}
+                              </div>
+                              <div>
+                                <strong>Product:</strong>
+                                {{item.products[0].name}}
+                              </div>
+                            </div>
+                          </v-card-title>
+                        </v-flex>
+                      </v-layout>
+                    </v-card>
+                  </v-flex>
+
+                  <v-expansion-panel popout focusable>
+                    <v-expansion-panel-content inset expand-icon="arrow_drop_down_circle">
+                      <div slot="header"></div>
+                      <recall-details :item="item"></recall-details>
+                    </v-expansion-panel-content>
+                  </v-expansion-panel>
+                </v-layout>
+              </v-container>
+            </v-card>
+          </template>
+          <v-divider inset light></v-divider>
+        </div>
       </v-flex>
     </v-layout>
   </v-container>
