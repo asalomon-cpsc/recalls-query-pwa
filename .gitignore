@@ -5,7 +5,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 /.vuepress/dist/
-
+deploy.cmd
 # Editor directories and files
 .idea
 *.suo
